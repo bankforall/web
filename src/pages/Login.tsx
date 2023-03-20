@@ -28,7 +28,7 @@ const Login: FC = () => {
           <div className=" flex flex-col space-y-3">
             <div>
               <input
-                className="bg-grey text-clay px-4 py-3 w-full rounded-lg placeholder:text-clay"
+                className="bg-grey text-clay px-4 py-3 w-full rounded-lg placeholder:text-clay focus:outline-none focus:border-0 focus:ring-1 focus:ring-lightpurple"
                 type="email"
                 placeholder="Email"
                 {...register("email")}
@@ -37,7 +37,7 @@ const Login: FC = () => {
             </div>
             <div>
               <input
-                className="bg-grey text-clay px-4 py-3 w-full rounded-lg placeholder:text-clay"
+                className="bg-grey text-clay px-4 py-3 w-full rounded-lg placeholder:text-clay focus:outline-none focus:border-0 focus:ring-1 focus:ring-lightpurple"
                 type="password"
                 placeholder="Password"
                 {...register("password")}

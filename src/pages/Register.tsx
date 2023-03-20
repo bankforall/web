@@ -32,7 +32,7 @@ const Register: FC = () => {
           <div className="flex flex-col space-y-3">
             <div>
               <input
-                className="bg-grey text-clay px-4 py-3 w-full rounded-lg placeholder:text-clay"
+                className="bg-grey text-clay px-4 py-3 w-full rounded-lg placeholder:text-clay focus:outline-none focus:border-0 focus:ring-1 focus:ring-lightpurple"
                 type="text"
                 placeholder="Full Name"
                 {...register("fullname")}
@@ -41,7 +41,7 @@ const Register: FC = () => {
             </div>
             <div>
               <input
-                className="bg-grey text-clay px-4 py-3 w-full rounded-lg placeholder:text-clay"
+                className="bg-grey text-clay px-4 py-3 w-full rounded-lg placeholder:text-clay focus:outline-none focus:border-0 focus:ring-1 focus:ring-lightpurple"
                 type="email"
                 placeholder="Email Address"
                 {...register("email")}
@@ -50,7 +50,7 @@ const Register: FC = () => {
             </div>
             <div>
               <input
-                className="bg-grey text-clay px-4 py-3 w-full rounded-lg placeholder:text-clay"
+                className="bg-grey text-clay px-4 py-3 w-full rounded-lg placeholder:text-clay focus:outline-none focus:border-0 focus:ring-1 focus:ring-lightpurple"
                 type="password"
                 placeholder="Password"
                 {...register("password")}
@@ -59,7 +59,7 @@ const Register: FC = () => {
             </div>
             <div>
               <input
-                className="bg-grey text-clay px-4 py-3 w-full rounded-lg placeholder:text-clay"
+                className="bg-grey text-clay px-4 py-3 w-full rounded-lg placeholder:text-clay focus:outline-none focus:border-0 focus:ring-1 focus:ring-lightpurple"
                 type="password"
                 placeholder="Confirm Password"
                 {...register("confirmPassword")}
@@ -70,7 +70,11 @@ const Register: FC = () => {
             </div>
           </div>
           <div className="mt-4 flex gap-3">
-            <input type="checkbox" {...register("terms")} className="w-6 h-6 accent-lightpurple" />
+            <input
+              type="checkbox"
+              {...register("terms")}
+              className="w-6 h-6 accent-lightpurple"
+            />
             <label className="text-xs text-purple opacity-80">
               By creating your account you agree with to our Terms and
               Conditions.
@@ -85,7 +89,10 @@ const Register: FC = () => {
             Sign up
           </button>
           <p className="text-center text-purple opacity-80 mt-4">
-            Have an account? - <Link to="/login" className="font-bold">Sign in</Link>
+            Have an account? -{" "}
+            <Link to="/login" className="font-bold">
+              Sign in
+            </Link>
           </p>
         </form>
       </div>
