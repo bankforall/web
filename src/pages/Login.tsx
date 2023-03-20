@@ -18,34 +18,51 @@ const Login: FC = () => {
   };
 
   return (
-    <div>
-      <div>
-        <h1>Welcome Back!</h1>
-        <p>Sign in to continue</p>
+    <div className="min-h-screen flex justify-center items-center p-5">
+      <div className="max-w-xs w-full">
+        <div className="text-center text-purple">
+          <h1 className="text-4xl font-bold">Welcome Back!</h1>
+          <p className="opacity-80 mt-5">Sign in to continue</p>
+        </div>
+        <form className="mt-12" onSubmit={handleSubmit(onSubmit)}>
+          <div className=" flex flex-col space-y-3">
+            <div>
+              <input
+                className="bg-grey text-clay px-4 py-3 w-full rounded-lg placeholder:text-clay"
+                type="email"
+                placeholder="Email"
+                {...register("email")}
+              />
+              {errors.email && <p>{errors.email.message}</p>}
+            </div>
+            <div>
+              <input
+                className="bg-grey text-clay px-4 py-3 w-full rounded-lg placeholder:text-clay"
+                type="password"
+                placeholder="Password"
+                {...register("password")}
+              />
+              {errors.password && <p>{errors.password.message}</p>}
+            </div>
+          </div>
+          <div className="text-right mt-4 text-purple opacity-80 text-xs">
+            <p>Forgot Password?</p>
+          </div>
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="py-3 px-4 mt-12 w-full text-center bg-lightpurple text-white font-bold rounded-lg"
+          >
+            Sign in
+          </button>
+          <p className="text-center text-purple opacity-80 mt-4">
+            Don't have an account? -{" "}
+            <Link to="/register" className="font-bold">
+              Sign Up
+            </Link>
+          </p>
+        </form>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <input type="email" placeholder="Email" {...register("email")} />
-          {errors.email && <p>{errors.email.message}</p>}
-        </div>
-        <div>
-          <input
-            type="password"
-            placeholder="Password"
-            {...register("password")}
-          />
-          {errors.password && <p>{errors.password.message}</p>}
-        </div>
-        <div>
-          <p>Forgot Password?</p>
-        </div>
-        <button type="submit" disabled={isSubmitting}>
-          Sign in
-        </button>
-        <p>
-          Don't have an account? - <Link to="/register">Sign Up</Link>
-        </p>
-      </form>
     </div>
   );
 };
