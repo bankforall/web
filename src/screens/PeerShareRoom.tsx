@@ -2,7 +2,7 @@ import React from "react";
 
 export default function PeerShareRoom() {
   return (
-    <div className="container max-w-sm max-h-screen mx-auto bg-[#F9F9FB] h-screen">
+    <div className="max-w-[640px] max-h-screen mx-auto bg-[#F9F9FB] h-screen">
       <div className="bg-lightpurple rounded-bl-3xl rounded-br-3xl py-4 px-8">
         <h1 className="text-white font-medium my-8 text-center">Peer Share</h1>
         <ul className="flex justify-between space-x-4 text-white">
