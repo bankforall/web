@@ -19,7 +19,7 @@ const Login: FC = () => {
 
   return (
     <div className="min-h-screen flex justify-center items-center p-5">
-      <div className="max-w-xs w-full">
+      <div className="max-w-sm w-full">
         <div className="text-center text-purple">
           <h1 className="text-4xl font-bold">Welcome Back!</h1>
           <p className="opacity-80 mt-5">Sign in to continue</p>
