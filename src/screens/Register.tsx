@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
-import { RegisterSchema, registerSchema } from "@/validations/register";
+import { RegisterSchema, registerSchema } from "@/libs/validations/register";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
