@@ -2,7 +2,7 @@ import React from "react";
 
 export default function PeerShareRoom() {
   return (
-    <div className="container max-h-screen mx-auto bg-[#F9F9FB] h-screen">
+    <div className="container max-w-sm max-h-screen mx-auto bg-[#F9F9FB] h-screen">
       <div className="bg-lightpurple rounded-bl-3xl rounded-br-3xl py-4 px-8">
         <h1 className="text-white font-medium my-8 text-center">Peer Share</h1>
         <ul className="flex justify-between space-x-4 text-white">
@@ -147,7 +147,7 @@ export default function PeerShareRoom() {
         <div className="mt-4 overflow-x-auto">
           <ul className="flex space-x-2">
             <li className="bg-white rounded-xl p-4">
-              <div className="flex flex-col justify-center items-center space-y-2 w-32">
+              <div className="flex flex-col justify-center items-center space-y-2 w-28">
                 <img
                   className="w-16 h-16 rounded-full"
                   src="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
@@ -160,7 +160,7 @@ export default function PeerShareRoom() {
               </div>
             </li>
             <li className="bg-white rounded-xl p-4">
-              <div className="flex flex-col justify-center items-center space-y-2 w-32">
+              <div className="flex flex-col justify-center items-center space-y-2 w-28">
                 <img
                   className="w-16 h-16 rounded-full"
                   src="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
@@ -173,7 +173,7 @@ export default function PeerShareRoom() {
               </div>
             </li>
             <li className="bg-white rounded-xl p-4">
-              <div className="flex flex-col justify-center items-center space-y-2 w-32">
+              <div className="flex flex-col justify-center items-center space-y-2 w-28">
                 <img
                   className="w-16 h-16 rounded-full"
                   src="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
@@ -186,7 +186,7 @@ export default function PeerShareRoom() {
               </div>
             </li>
             <li className="bg-white rounded-xl p-4">
-              <div className="flex flex-col justify-center items-center space-y-2 w-32">
+              <div className="flex flex-col justify-center items-center space-y-2 w-28">
                 <img
                   className="w-16 h-16 rounded-full"
                   src="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
