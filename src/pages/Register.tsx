@@ -19,7 +19,7 @@ const Register: FC = () => {
 
   return (
     <div className="min-h-screen flex justify-center items-center p-5">
-      <div className="max-w-xs w-full">
+      <div className="max-w-sm w-full">
         <div className="text-center text-purple">
           <h1 className="text-4xl font-bold">Welcome!</h1>
           <p className="opacity-80 mt-5">
@@ -28,7 +28,7 @@ const Register: FC = () => {
             details for your new account
           </p>
         </div>
-        <form className="mt-12" onSubmit={handleSubmit(onSubmit)}>
+        <form className="mt-[60px]" onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col space-y-3">
             <div>
               <input
