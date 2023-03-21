@@ -144,7 +144,7 @@ export default function PeerShareRoom() {
       </div>
       <div className="grid px-8 mt-8">
         <h2 className="text-xl font-medium">Member</h2>
-        <div className="mt-4 overflow-x-auto">
+        <div className="mt-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
           <ul className="flex space-x-2">
             <li className="bg-white rounded-xl p-4">
               <div className="flex flex-col justify-center items-center space-y-2 w-28">
@@ -210,7 +210,7 @@ export default function PeerShareRoom() {
           placeholder="Search name or number."
         />
 
-        <div className="overflow-y-auto max-h-[40vh]">
+        <div className="overflow-y-auto max-h-[40vh] whitespace-nowrap scrollbar-hide">
           <ul className="flex flex-col space-y-2">
             <li className="flex justify-between items-center space-x-4 py-4 border-b-[1px]">
               <div className="flex items-center space-x-4">
