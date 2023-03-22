@@ -1,20 +1,20 @@
-import React, { FC } from "react";
-import { Route, Routes } from "react-router-dom";
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Home from "@/screens/Home";
 import PeerShareRoom from "@/screens/PeerShareRoom";
 import Login from "@/screens/Login";
 import Register from "@/screens/Register";
 
-const App: FC = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/peershare-room" element={<PeerShareRoom />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-    </Routes>
-  );
+const router = createBrowserRouter([
+  { path: "/", element: <Home /> },
+  { path: "/peershare-room", element: <PeerShareRoom /> },
+  { path: "/login", element: <Login /> },
+  { path: "/register", element: <Register /> },
+]);
+
+const App = () => {
+  return <RouterProvider router={router} />;
 };
 
 export default App;
