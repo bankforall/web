@@ -1,13 +1,20 @@
 import React, { FC } from "react";
 import { Route, Routes } from "react-router-dom";
-import Home from "@/pages/Home";
-import Dashboard from "./pages/Dashboard";
+
+import Home from "@/screens/Home";
+import Dashboard from "@/screens/Dashboard";
+import PeerShareRoom from "@/screens/PeerShareRoom";
+import Login from "@/screens/Login";
+import Register from "@/screens/Register";
 
 const App: FC = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/dashboard" element={<Dashboard/>} />
+      <Route path="/peershare-room" element={<PeerShareRoom />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
     </Routes>
   );
 };
