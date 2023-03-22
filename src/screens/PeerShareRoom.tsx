@@ -1,8 +1,54 @@
 import React from "react";
+import BaseLayout from "@/components/BaseLayout";
+
+function MemberCard({
+  username,
+  phoneNumber,
+  profilePicture,
+}: {
+  username: string;
+  phoneNumber: string;
+  profilePicture: string;
+}) {
+  return (
+    <div className="flex flex-col justify-center items-center space-y-2 w-32 bg-white p-4 rounded-md shadow-sm">
+      <img className="w-16 h-16 rounded-full" src={profilePicture} alt="" />
+      <div className="space-y-2 text-center">
+        <h3 className="font-bold text-base">{username}</h3>
+        <p className="text-gray-400 text-sm">{phoneNumber}</p>
+      </div>
+    </div>
+  );
+}
+
+function ContactCard({
+  username,
+  phoneNumber,
+  profilePicture,
+}: {
+  username: string;
+  phoneNumber: string;
+  profilePicture: string;
+}) {
+  return (
+    <div className="flex justify-between items-center space-x-4 py-4 bg-white border-b-[1px]">
+      <div className="flex items-center space-x-4">
+        <img className="w-12 h-12 rounded-full" src={profilePicture} alt="" />
+        <div className="flex flex-col">
+          <h3 className="font-medium">{username}</h3>
+          <p className="text-gray-400 text-sm">{phoneNumber}</p>
+        </div>
+      </div>
+      <button className="bg-[#9EA6BE] px-8 py-2 rounded-lg outline-none font-light text-white">
+        DM
+      </button>
+    </div>
+  );
+}
 
 export default function PeerShareRoom() {
   return (
-    <div className="max-w-[640px] max-h-screen mx-auto bg-[#F9F9FB] h-screen">
+    <BaseLayout>
       <div className="bg-lightpurple rounded-bl-3xl rounded-br-3xl py-4 px-8">
         <h1 className="text-white font-medium my-8 text-center">Peer Share</h1>
         <ul className="flex justify-between space-x-4 text-white">
@@ -145,58 +191,41 @@ export default function PeerShareRoom() {
       <div className="grid px-8 mt-8">
         <h2 className="text-xl font-medium">Member</h2>
         <div className="mt-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
-          <ul className="flex space-x-2">
-            <li className="bg-white rounded-xl p-4">
-              <div className="flex flex-col justify-center items-center space-y-2 w-28">
-                <img
-                  className="w-16 h-16 rounded-full"
-                  src="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-                  alt=""
-                />
-                <div className="space-y-2 text-center">
-                  <h3 className="font-medium">Halley</h3>
-                  <p className="text-gray-400">+1 234 567 890</p>
-                </div>
-              </div>
+          <ul className="flex space-x-4">
+            <li>
+              <MemberCard
+                username="Helly"
+                phoneNumber="+66 985 9385"
+                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+              />
             </li>
-            <li className="bg-white rounded-xl p-4">
-              <div className="flex flex-col justify-center items-center space-y-2 w-28">
-                <img
-                  className="w-16 h-16 rounded-full"
-                  src="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-                  alt=""
-                />
-                <div className="space-y-2 text-center">
-                  <h3 className="font-medium">Halley</h3>
-                  <p className="text-gray-400">+1 234 567 890</p>
-                </div>
-              </div>
+            <li>
+              <MemberCard
+                username="Helly"
+                phoneNumber="+66 985 9385"
+                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+              />
             </li>
-            <li className="bg-white rounded-xl p-4">
-              <div className="flex flex-col justify-center items-center space-y-2 w-28">
-                <img
-                  className="w-16 h-16 rounded-full"
-                  src="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-                  alt=""
-                />
-                <div className="space-y-2 text-center">
-                  <h3 className="font-medium">Halley</h3>
-                  <p className="text-gray-400">+1 234 567 890</p>
-                </div>
-              </div>
+            <li>
+              <MemberCard
+                username="Helly"
+                phoneNumber="+66 985 9385"
+                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+              />
             </li>
-            <li className="bg-white rounded-xl p-4">
-              <div className="flex flex-col justify-center items-center space-y-2 w-28">
-                <img
-                  className="w-16 h-16 rounded-full"
-                  src="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-                  alt=""
-                />
-                <div className="space-y-2 text-center">
-                  <h3 className="font-medium">Halley</h3>
-                  <p className="text-gray-400">+1 234 567 890</p>
-                </div>
-              </div>
+            <li>
+              <MemberCard
+                username="Helly"
+                phoneNumber="+66 985 9385"
+                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+              />
+            </li>
+            <li>
+              <MemberCard
+                username="Helly"
+                phoneNumber="+66 985 9385"
+                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+              />
             </li>
           </ul>
         </div>
@@ -210,123 +239,53 @@ export default function PeerShareRoom() {
           placeholder="Search name or number."
         />
 
-        <div className="overflow-y-auto max-h-[40vh] whitespace-nowrap scrollbar-hide">
+        <div className="overflow-y-auto max-h-[50vh] whitespace-nowrap scrollbar-hide">
           <ul className="flex flex-col space-y-2">
-            <li className="flex justify-between items-center space-x-4 py-4 border-b-[1px]">
-              <div className="flex items-center space-x-4">
-                <img
-                  className="w-12 h-12 rounded-full"
-                  src="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-                  alt=""
-                />
-                <div className="flex flex-col">
-                  <h3 className="font-medium">Halley</h3>
-                  <p className="text-gray-400">+1 234 567 890</p>
-                </div>
-              </div>
-              <button className="bg-[#9EA6BE] px-8 py-2 rounded-lg outline-none font-light text-white">
-                Add
-              </button>
+            <li>
+              <ContactCard
+                username="Helly"
+                phoneNumber="+66 985 9385"
+                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+              />
             </li>
-            <li className="flex justify-between items-center space-x-4 py-4 border-b-[1px]">
-              <div className="flex items-center space-x-4">
-                <img
-                  className="w-12 h-12 rounded-full"
-                  src="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-                  alt=""
-                />
-                <div className="flex flex-col">
-                  <h3 className="font-medium">Halley</h3>
-                  <p className="text-gray-400">+1 234 567 890</p>
-                </div>
-              </div>
-              <button className="bg-[#9EA6BE] px-8 py-2 rounded-lg outline-none font-light text-white">
-                Add
-              </button>
+            <li>
+              <ContactCard
+                username="Helly"
+                phoneNumber="+66 985 9385"
+                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+              />
             </li>
-            <li className="flex justify-between items-center space-x-4 py-4 border-b-[1px]">
-              <div className="flex items-center space-x-4">
-                <img
-                  className="w-12 h-12 rounded-full"
-                  src="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-                  alt=""
-                />
-                <div className="flex flex-col">
-                  <h3 className="font-medium">Halley</h3>
-                  <p className="text-gray-400">+1 234 567 890</p>
-                </div>
-              </div>
-              <button className="bg-[#9EA6BE] px-8 py-2 rounded-lg outline-none font-light text-white">
-                Add
-              </button>
+            <li>
+              <ContactCard
+                username="Helly"
+                phoneNumber="+66 985 9385"
+                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+              />
             </li>
-            <li className="flex justify-between items-center space-x-4 py-4 border-b-[1px]">
-              <div className="flex items-center space-x-4">
-                <img
-                  className="w-12 h-12 rounded-full"
-                  src="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-                  alt=""
-                />
-                <div className="flex flex-col">
-                  <h3 className="font-medium">Halley</h3>
-                  <p className="text-gray-400">+1 234 567 890</p>
-                </div>
-              </div>
-              <button className="bg-[#9EA6BE] px-8 py-2 rounded-lg outline-none font-light text-white">
-                DM
-              </button>
+            <li>
+              <ContactCard
+                username="Helly"
+                phoneNumber="+66 985 9385"
+                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+              />
             </li>
-            <li className="flex justify-between items-center space-x-4 py-4 border-b-[1px]">
-              <div className="flex items-center space-x-4">
-                <img
-                  className="w-12 h-12 rounded-full"
-                  src="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-                  alt=""
-                />
-                <div className="flex flex-col">
-                  <h3 className="font-medium">Halley</h3>
-                  <p className="text-gray-400">+1 234 567 890</p>
-                </div>
-              </div>
-              <button className="bg-[#9EA6BE] px-8 py-2 rounded-lg outline-none font-light text-white">
-                DM
-              </button>
+            <li>
+              <ContactCard
+                username="Helly"
+                phoneNumber="+66 985 9385"
+                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+              />
             </li>
-            <li className="flex justify-between items-center space-x-4 py-4 border-b-[1px]">
-              <div className="flex items-center space-x-4">
-                <img
-                  className="w-12 h-12 rounded-full"
-                  src="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-                  alt=""
-                />
-                <div className="flex flex-col">
-                  <h3 className="font-medium">Halley</h3>
-                  <p className="text-gray-400">+1 234 567 890</p>
-                </div>
-              </div>
-              <button className="bg-[#9EA6BE] px-8 py-2 rounded-lg outline-none font-light text-white">
-                DM
-              </button>
-            </li>
-            <li className="flex justify-between items-center space-x-4 py-4 border-b-[1px]">
-              <div className="flex items-center space-x-4">
-                <img
-                  className="w-12 h-12 rounded-full"
-                  src="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-                  alt=""
-                />
-                <div className="flex flex-col">
-                  <h3 className="font-medium">Halley</h3>
-                  <p className="text-gray-400">+1 234 567 890</p>
-                </div>
-              </div>
-              <button className="bg-[#9EA6BE] px-8 py-2 rounded-lg outline-none font-light text-white">
-                DM
-              </button>
+            <li>
+              <ContactCard
+                username="Helly"
+                phoneNumber="+66 985 9385"
+                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+              />
             </li>
           </ul>
         </div>
       </div>
-    </div>
+    </BaseLayout>
   );
 }
