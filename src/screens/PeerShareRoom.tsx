@@ -185,20 +185,20 @@ export default function PeerShareRoom() {
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M0 5.78V0H5.78V5.78H0ZM1.36 4.42H4.42V1.36H1.36V4.42Z"
                 />
                 <rect x="2.20996" y="2.20996" width="1.36" height="1.36" />
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M11.6279 5.78V0H17.4079V5.78H11.6279ZM12.9879 4.42H16.0479V1.36H12.9879V4.42Z"
                 />
                 <rect x="13.8379" y="2.20996" width="1.36" height="1.36" />
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M0 17.4079V11.6279H5.78V17.4079H0ZM1.36 16.0479H4.42V12.9879H1.36V16.0479Z"
                 />
                 <rect x="2.20996" y="13.8379" width="1.36" height="1.36" />
@@ -211,8 +211,8 @@ export default function PeerShareRoom() {
                 <path d="M9.5198 12.0701V10.7441H8.1598V8.05811H6.7998V10.7781H8.1598V12.1041H9.5198V13.4301H12.2398V12.0701H9.5198Z" />
                 <rect x="9.51953" y="6.698" width="1.36" height="2.72" />
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M16.0482 6.698V8.024H17.4082V10.744H13.6002V9.418H12.2402V8.058H13.5662V6.698H16.0482ZM13.6002 9.384H16.0482V8.058H13.6002V9.384Z"
                 />
                 <rect x="16.0479" y="12.0701" width="1.36" height="2.72" />
