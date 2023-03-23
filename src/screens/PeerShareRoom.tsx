@@ -47,15 +47,30 @@ function ContactCard({
 }
 
 export default function PeerShareRoom() {
+  const [activeTab, setActiveTab] = React.useState(0);
+
+  const handleTabClick = (tab: number) => {
+    setActiveTab(tab);
+  };
+
   return (
     <BaseLayout>
       <div className="bg-lightpurple rounded-bl-3xl rounded-br-3xl py-4 px-8">
         <h1 className="text-white font-medium my-8 text-center">Peer Share</h1>
         <ul className="flex justify-between space-x-4 text-white">
           <li className="flex flex-col justify-center items-center space-y-2">
-            <button className="p-4 bg-[#7C6EFF] rounded-xl">
+            <button
+              className="p-4 rounded-xl"
+              style={{
+                backgroundColor: activeTab === 0 ? "#7C6EFF" : "#665AD9",
+              }}
+              onClick={() => handleTabClick(0)}
+            >
               <svg
                 className="fill-white"
+                style={{
+                  opacity: activeTab === 0 ? 1 : 0.6,
+                }}
                 width="16"
                 height="17"
                 viewBox="0 0 16 17"
@@ -68,9 +83,18 @@ export default function PeerShareRoom() {
             <span className="text-sm">Member</span>
           </li>
           <li className="flex flex-col justify-center items-center space-y-2">
-            <button className="p-4 bg-[#665AD9] rounded-xl">
+            <button
+              className="p-4 rounded-xl"
+              style={{
+                backgroundColor: activeTab === 1 ? "#7C6EFF" : "#665AD9",
+              }}
+              onClick={() => handleTabClick(1)}
+            >
               <svg
-                className="fill-white opacity-60"
+                className="fill-white"
+                style={{
+                  opacity: activeTab === 1 ? 1 : 0.6,
+                }}
                 width="19"
                 height="19"
                 viewBox="0 0 19 19"
@@ -118,9 +142,18 @@ export default function PeerShareRoom() {
             <span className="text-sm">Pool</span>
           </li>
           <li className="flex flex-col justify-center items-center space-y-2">
-            <button className="p-4 bg-[#665AD9] rounded-xl">
+            <button
+              className="p-4 bg-[#665AD9] rounded-xl"
+              onClick={() => handleTabClick(2)}
+              style={{
+                backgroundColor: activeTab === 2 ? "#7C6EFF" : "#665AD9",
+              }}
+            >
               <svg
-                className="fill-white opacity-60"
+                className="fill-white"
+                style={{
+                  opacity: activeTab === 2 ? 1 : 0.6,
+                }}
                 width="20"
                 height="14"
                 viewBox="0 0 20 14"
@@ -134,9 +167,18 @@ export default function PeerShareRoom() {
             <span className="text-sm">Biding</span>
           </li>
           <li className="flex flex-col justify-center items-center space-y-2">
-            <button className="p-4 bg-[#665AD9] rounded-xl">
+            <button
+              className="p-4 bg-[#665AD9] rounded-xl"
+              onClick={() => handleTabClick(3)}
+              style={{
+                backgroundColor: activeTab === 3 ? "#7C6EFF" : "#665AD9",
+              }}
+            >
               <svg
-                className="fill-white opacity-60"
+                className="fill-white"
+                style={{
+                  opacity: activeTab === 3 ? 1 : 0.6,
+                }}
                 width="18"
                 height="18"
                 viewBox="0 0 18 18"
