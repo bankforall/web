@@ -12,10 +12,10 @@ function MemberCard({
 }) {
   return (
     <div className="flex flex-col justify-center items-center space-y-2 w-32 bg-white p-4 rounded-md shadow-sm">
-      <img className="w-16 h-16 rounded-full" src={profilePicture} alt="" />
-      <div className="space-y-2 text-center">
-        <h3 className="font-bold text-base">{username}</h3>
-        <p className="text-gray-400 text-sm">{phoneNumber}</p>
+      <img className="w-16 h-16 rounded-2xl" src={profilePicture} alt="" />
+      <div className="text-center">
+        <h3 className="font-medium text-base">{username}</h3>
+        <p className="text-gray-400 text-[0.7rem]">{phoneNumber}</p>
       </div>
     </div>
   );
@@ -36,13 +36,139 @@ function ContactCard({
         <img className="w-12 h-12 rounded-full" src={profilePicture} alt="" />
         <div className="flex flex-col">
           <h3 className="font-medium">{username}</h3>
-          <p className="text-gray-400 text-sm">{phoneNumber}</p>
+          <p className="text-gray-400 text-[0.7rem]">{phoneNumber}</p>
         </div>
       </div>
       <button className="bg-[#9EA6BE] px-8 py-2 rounded-lg outline-none font-light text-white">
         DM
       </button>
     </div>
+  );
+}
+
+function MemberTab() {
+  return (
+    <>
+      <div className="grid pl-8 mt-8">
+        <h2 className="text-xl font-medium">Member</h2>
+        <div className="mt-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
+          <ul className="flex space-x-4 ">
+            <li>
+              <MemberCard
+                username="Helly"
+                phoneNumber="+66 985 9385"
+                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+              />
+            </li>
+            <li>
+              <MemberCard
+                username="Helly"
+                phoneNumber="+66 985 9385"
+                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+              />
+            </li>
+            <li>
+              <MemberCard
+                username="Helly"
+                phoneNumber="+66 985 9385"
+                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+              />
+            </li>
+            <li>
+              <MemberCard
+                username="Helly"
+                phoneNumber="+66 985 9385"
+                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+              />
+            </li>
+            <li className="pr-8">
+              <MemberCard
+                username="Helly"
+                phoneNumber="+66 985 9385"
+                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+              />
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="grid px-8 mt-8 py-4 bg-white space-y-4">
+        <h2 className="text-xl font-medium">All contacts</h2>
+        <div className="bg-[#F9F9FB] rounded-lg outline-none flex items-center pl-4">
+          <svg
+            width="19"
+            height="19"
+            viewBox="0 0 19 19"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M0 8C0 3.58892 3.58892 0 8 0C12.4113 0 16 3.58892 16 8C16 12.4113 12.4113 16 8 16C3.58892 16 0 12.4113 0 8ZM1.47692 8.00004C1.47692 11.5968 4.4032 14.5231 8 14.5231C11.5968 14.5231 14.5231 11.5968 14.5231 8C14.5231 4.4032 11.5968 1.47692 8 1.47692C4.4032 1.47692 1.47692 4.40324 1.47692 8.00004Z"
+              fill="#8F96AD"
+            />
+            <path
+              d="M18.7727 17.6756L14.3244 13.2273C14.0213 12.9242 13.5304 12.9242 13.2273 13.2273C12.9242 13.5302 12.9242 14.0216 13.2273 14.3244L17.6756 18.7727C17.8271 18.9242 18.0255 19 18.2241 19C18.4225 19 18.6211 18.9242 18.7727 18.7727C19.0758 18.4698 19.0758 17.9784 18.7727 17.6756Z"
+              fill="#8F96AD"
+            />
+          </svg>
+
+          <input
+            className="bg-[#F9F9FB] px-4 py-2 w-full outline-none "
+            type="text"
+            placeholder="Search name or number."
+          />
+        </div>
+
+        <div className="overflow-y-auto max-h-[50vh] whitespace-nowrap scrollbar-hide">
+          <ul className="flex flex-col space-y-2">
+            <li>
+              <ContactCard
+                username="Helly"
+                phoneNumber="+66 985 9385"
+                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+              />
+            </li>
+            <li>
+              <ContactCard
+                username="Helly"
+                phoneNumber="+66 985 9385"
+                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+              />
+            </li>
+            <li>
+              <ContactCard
+                username="Helly"
+                phoneNumber="+66 985 9385"
+                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+              />
+            </li>
+            <li>
+              <ContactCard
+                username="Helly"
+                phoneNumber="+66 985 9385"
+                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+              />
+            </li>
+            <li>
+              <ContactCard
+                username="Helly"
+                phoneNumber="+66 985 9385"
+                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+              />
+            </li>
+            <li>
+              <ContactCard
+                username="Helly"
+                phoneNumber="+66 985 9385"
+                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+              />
+            </li>
+          </ul>
+        </div>
+      </div>
+    </>
   );
 }
 
@@ -230,104 +356,8 @@ export default function PeerShareRoom() {
           </li>
         </ul>
       </div>
-      <div className="grid px-8 mt-8">
-        <h2 className="text-xl font-medium">Member</h2>
-        <div className="mt-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
-          <ul className="flex space-x-4">
-            <li>
-              <MemberCard
-                username="Helly"
-                phoneNumber="+66 985 9385"
-                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-              />
-            </li>
-            <li>
-              <MemberCard
-                username="Helly"
-                phoneNumber="+66 985 9385"
-                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-              />
-            </li>
-            <li>
-              <MemberCard
-                username="Helly"
-                phoneNumber="+66 985 9385"
-                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-              />
-            </li>
-            <li>
-              <MemberCard
-                username="Helly"
-                phoneNumber="+66 985 9385"
-                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-              />
-            </li>
-            <li>
-              <MemberCard
-                username="Helly"
-                phoneNumber="+66 985 9385"
-                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-              />
-            </li>
-          </ul>
-        </div>
-      </div>
 
-      <div className="grid px-8 mt-8 py-4 bg-white space-y-4">
-        <h2 className="text-xl font-medium">All contacts</h2>
-        <input
-          className="bg-[#F9F9FB] px-4 py-2 rounded-lg outline-none"
-          type="text"
-          placeholder="Search name or number."
-        />
-
-        <div className="overflow-y-auto max-h-[50vh] whitespace-nowrap scrollbar-hide">
-          <ul className="flex flex-col space-y-2">
-            <li>
-              <ContactCard
-                username="Helly"
-                phoneNumber="+66 985 9385"
-                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-              />
-            </li>
-            <li>
-              <ContactCard
-                username="Helly"
-                phoneNumber="+66 985 9385"
-                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-              />
-            </li>
-            <li>
-              <ContactCard
-                username="Helly"
-                phoneNumber="+66 985 9385"
-                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-              />
-            </li>
-            <li>
-              <ContactCard
-                username="Helly"
-                phoneNumber="+66 985 9385"
-                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-              />
-            </li>
-            <li>
-              <ContactCard
-                username="Helly"
-                phoneNumber="+66 985 9385"
-                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-              />
-            </li>
-            <li>
-              <ContactCard
-                username="Helly"
-                phoneNumber="+66 985 9385"
-                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-              />
-            </li>
-          </ul>
-        </div>
-      </div>
+      <MemberTab />
     </BaseLayout>
   );
 }
