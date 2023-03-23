@@ -1,6 +1,38 @@
 import React from "react";
 import BaseLayout from "@/components/BaseLayout";
 
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Doughnut } from "react-chartjs-2";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+export const data = {
+  labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+  datasets: [
+    {
+      label: "# of Votes",
+      data: [12, 19, 3, 5, 2, 3],
+      backgroundColor: [
+        "rgba(255, 99, 132, 0.2)",
+        "rgba(54, 162, 235, 0.2)",
+        "rgba(255, 206, 86, 0.2)",
+        "rgba(75, 192, 192, 0.2)",
+        "rgba(153, 102, 255, 0.2)",
+        "rgba(255, 159, 64, 0.2)",
+      ],
+      borderColor: [
+        "rgba(255, 99, 132, 1)",
+        "rgba(54, 162, 235, 1)",
+        "rgba(255, 206, 86, 1)",
+        "rgba(75, 192, 192, 1)",
+        "rgba(153, 102, 255, 1)",
+        "rgba(255, 159, 64, 1)",
+      ],
+      borderWidth: 1,
+    },
+  ],
+};
+
 function MemberCard({
   username,
   phoneNumber,
@@ -25,23 +57,33 @@ function ContactCard({
   username,
   phoneNumber,
   profilePicture,
+  credit,
+  isUser,
+  isContact,
 }: {
   username: string;
   phoneNumber: string;
   profilePicture: string;
+  credit: string;
+  isUser?: boolean;
+  isContact?: boolean;
 }) {
   return (
     <div className="flex justify-between items-center space-x-4 py-4 bg-white border-b-[1px]">
       <div className="flex items-center space-x-4">
-        <img className="w-12 h-12 rounded-full" src={profilePicture} alt="" />
+        <img className="w-12 h-12 rounded-2xl" src={profilePicture} alt="" />
         <div className="flex flex-col">
-          <h3 className="font-medium">{username}</h3>
+          <h3 className="font-medium">
+            {username} : {credit}
+          </h3>
           <p className="text-gray-400 text-[0.7rem]">{phoneNumber}</p>
         </div>
       </div>
-      <button className="bg-[#9EA6BE] px-8 py-2 rounded-lg outline-none font-light text-white">
-        DM
-      </button>
+      {isUser ? null : (
+        <button className="bg-[#9EA6BE] w-20 h-10 rounded-lg outline-none font-extralight text-sm text-white">
+          {isContact ? "DM" : "Add"}
+        </button>
+      )}
     </div>
   );
 }
@@ -55,35 +97,35 @@ function MemberTab() {
           <ul className="flex space-x-4 ">
             <li>
               <MemberCard
-                username="Helly"
+                username="Hailey Sanders"
                 phoneNumber="+66 985 9385"
                 profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
               />
             </li>
             <li>
               <MemberCard
-                username="Helly"
+                username="Zayn Michel"
                 phoneNumber="+66 985 9385"
                 profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
               />
             </li>
             <li>
               <MemberCard
-                username="Helly"
+                username="Thomas Denver"
                 phoneNumber="+66 985 9385"
                 profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
               />
             </li>
             <li>
               <MemberCard
-                username="Helly"
+                username="Sherry Blossom"
                 phoneNumber="+66 985 9385"
                 profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
               />
             </li>
             <li className="pr-8">
               <MemberCard
-                username="Helly"
+                username="You"
                 phoneNumber="+66 985 9385"
                 profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
               />
@@ -125,44 +167,162 @@ function MemberTab() {
           <ul className="flex flex-col space-y-2">
             <li>
               <ContactCard
-                username="Helly"
+                username="Hailey Sanders"
                 phoneNumber="+66 985 9385"
                 profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+                credit="A"
               />
             </li>
             <li>
               <ContactCard
-                username="Helly"
+                username="Zayn Michel"
                 phoneNumber="+66 985 9385"
                 profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+                credit="B+"
               />
             </li>
             <li>
               <ContactCard
-                username="Helly"
+                username="Thomas Denver"
                 phoneNumber="+66 985 9385"
                 profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+                credit="B+"
+                isContact={true}
               />
             </li>
             <li>
               <ContactCard
-                username="Helly"
+                username="Sherry Blossom"
                 phoneNumber="+66 985 9385"
                 profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+                credit="A"
+                isContact={true}
               />
             </li>
             <li>
               <ContactCard
-                username="Helly"
+                username="You"
                 phoneNumber="+66 985 9385"
                 profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+                credit="A"
+                isUser={true}
+              />
+            </li>
+          </ul>
+        </div>
+      </div>
+    </>
+  );
+}
+
+function PoolMemberAction({
+  username,
+  phoneNumber,
+  profilePicture,
+  credit,
+  status,
+  ratio,
+}: {
+  username: string;
+  phoneNumber: string;
+  profilePicture: string;
+  credit: string;
+  status: string;
+  ratio?: string;
+}) {
+  return (
+    <div className="flex justify-between items-center space-x-4 py-4 border-b-[1px]">
+      <div className="flex items-center space-x-4">
+        <img className="w-12 h-12 rounded-2xl" src={profilePicture} alt="" />
+        <div className="flex flex-col">
+          <h3 className="font-medium text-sm">
+            {username} : {credit}
+            {ratio && `(${ratio})`}
+          </h3>
+          <p className="text-gray-400 text-[0.7rem]">{phoneNumber}</p>
+        </div>
+      </div>
+      <button
+        className="w-20 h-10 rounded-lg outline-none font-extralight text-sm text-white"
+        style={{
+          backgroundColor: status === "lend" ? "#9EA6BE" : "#6DC82A",
+        }}
+      >
+        {status === "lend" ? "Lend" : "Bid-able"}
+      </button>
+    </div>
+  );
+}
+
+function PoolTab() {
+  return (
+    <>
+      <div className="grid px-8 mt-8">
+        <div>
+          <h1 className="text-xl font-medium">Pool</h1>
+          <span>5/500/B+</span>
+        </div>
+        <Doughnut
+          data={data}
+          options={{
+            responsive: true,
+            plugins: {
+              legend: {
+                position: "bottom",
+              },
+            },
+          }}
+        />
+      </div>
+      <div className="grid px-8 mt-8 py-4 space-y-4">
+        <h2 className="text-xl font-medium">Round 3/5</h2>
+        <div className="overflow-y-auto whitespace-nowrap scrollbar-hide">
+          <ul className="flex flex-col space-y-2">
+            <li>
+              <PoolMemberAction
+                username="Hailey Sanders"
+                phoneNumber="+66 985 9385"
+                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+                credit="A"
+                status="lend"
+                ratio="75/5"
               />
             </li>
             <li>
-              <ContactCard
-                username="Helly"
+              <PoolMemberAction
+                username="Zayn Michel"
                 phoneNumber="+66 985 9385"
                 profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+                credit="B+"
+                status="lend"
+                ratio="75/4"
+              />
+            </li>
+            <li>
+              <PoolMemberAction
+                username="Thomas Denver"
+                phoneNumber="+66 985 9385"
+                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+                credit="B+"
+                status="bid-able"
+              />
+            </li>
+            <li>
+              <PoolMemberAction
+                username="Sherry Blossom"
+                phoneNumber="+66 985 9385"
+                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+                credit="A"
+                status="bid-able"
+              />
+            </li>
+            <li>
+              <PoolMemberAction
+                username="You"
+                phoneNumber="+66 985 9385"
+                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+                credit="A"
+                status="bid-able"
               />
             </li>
           </ul>
@@ -357,7 +517,8 @@ export default function PeerShareRoom() {
         </ul>
       </div>
 
-      <MemberTab />
+      {activeTab === 0 && <MemberTab />}
+      {activeTab === 1 && <PoolTab />}
     </BaseLayout>
   );
 }
