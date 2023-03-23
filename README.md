@@ -39,7 +39,7 @@ Designs for the Peer Share UI can be found [here](https://www.figma.com/file/Yu0
 - To install the project on your local machine, follow these steps:
 - Clone the repository using `git clone https://github.com/<username>/<repository-name>.git`.
 - Install the dependencies by running `npm install` in the root directory.
-- Start the client by running `npm start`.
+- Start the client by running `npm run dev`.
 - Open your browser and navigate to http://localhost:3000.
 
 ## Contributing
