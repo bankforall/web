@@ -14,12 +14,12 @@ Designs for the Peer Share UI can be found [here](https://www.figma.com/file/Yu0
 - [ ] Touch ID Confirmation Screen
 - [ ] Set Pin Screen
 - [ ] Money Summary Screen
-- [ ] Dashboard Screen
+- [x] Dashboard Screen
 - [ ] Lending Peer Sharing Dashboard Screen
-- [ ] Peer Share Room (Member List) Screen
-- [ ] Peer Share Room (Pool) Screen
-- [ ] Peer Share Room (Biding) Screen
-- [ ] Peer Share Room (Payment) Screen
+- [x] Peer Share Room (Member List) Screen
+- [x] Peer Share Room (Pool) Screen
+- [x] Peer Share Room (Biding) Screen
+- [x] Peer Share Room (Payment) Screen
 - [ ] Peer Share Room (Receipt) Screen
 - [ ] Won Bids Screen
 
