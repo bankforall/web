@@ -1,11 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { LoginSchema, loginSchema } from "@/libs/validations/login";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import {Link, useNavigate} from "react-router-dom";
+import {LoginSchema, loginSchema} from "@/libs/validations/login";
+import {SubmitHandler, useForm} from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
 import BaseLayout from "@/components/BaseLayout";
 
 const Login = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -14,9 +15,35 @@ const Login = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit: SubmitHandler<LoginSchema> = (data) => {
+  const onSubmit: SubmitHandler<LoginSchema> = async (data) => {
     console.log(data);
+    const res = await login(data);
+    if (res) {
+      navigate("/dashboard");
+    }
   };
+
+  async function login(data: LoginSchema): Promise<boolean> {
+    return new Promise(resolve => setTimeout(() => {resolve(true)}, 1000));
+
+    //TODO wait for backend
+    // return await fetch('https://localhost:8080/signIn', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(data)
+    // })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //       console.log('Success:', data);
+    //       return true;
+    //     })
+    //     .catch(error => {
+    //       console.error('Error:', error);
+    //       return false;
+    //     });
+  }
 
   return (
     <BaseLayout>
