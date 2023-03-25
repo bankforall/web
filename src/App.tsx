@@ -6,7 +6,7 @@ import Dashboard from "@/screens/Dashboard";
 import PeerShareRoom from "@/screens/PeerShareRoom";
 import Login from "@/screens/Login";
 import Register from "@/screens/Register";
-import PeerSharingDashboard from "@/screens/peerSharingDashboard";
+import PeerSharingDashboard from "@/screens/PeerSharingDashboard";
 
 const router = createBrowserRouter([
   { path: "/", element: <Welcome /> },
