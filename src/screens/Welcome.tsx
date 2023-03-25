@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import BaseLayout from "@/components/BaseLayout";
 
 const Welcome: FC = () => {
-  // timeout 1s to redirect to login page
   setTimeout(() => {
     window.location.href = "/login";
   }, 1600);
