@@ -6,6 +6,63 @@ import { Doughnut } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+const PeerShareRoomData = {
+  id: "1",
+  roomName: "Peer Share Room",
+  round: 1,
+  paymentTerm: 500,
+  paymentTermUnit: "1w",
+  startBidDate: "2021-08-01",
+  bidTimeOut: "1h",
+  creditRequirement: "B",
+  maxMember: 5,
+  private: false,
+  typeRoom: "float",
+  inviteCode: "123456",
+  roomPassword: "123456",
+  members: [
+    {
+      id: "1",
+      fullName: "John Doe",
+      avatar: "https://picsum.photos/200",
+      credit: "A",
+      phoneNumber: "0123456789",
+      isBidden: true,
+      isPaid: true,
+      isWinner: false,
+      bitRate: 0,
+      interest: 0,
+      totalInterest: 0,
+    },
+    {
+      id: "2",
+      fullName: "John Doe 2",
+      avatar: "https://picsum.photos/200",
+      credit: "B",
+      phoneNumber: "0123456789",
+      isBidden: false,
+      isPaid: true,
+      isWinner: false,
+      bitRate: 0,
+      interest: 0,
+      totalInterest: 0,
+    },
+    {
+      id: "3",
+      fullName: "John Doe 3",
+      credit: "B+",
+      avatar: "https://picsum.photos/200",
+      phoneNumber: "0123456789",
+      isBidden: false,
+      isPaid: true,
+      isWinner: true,
+      bitRate: 0,
+      interest: 50,
+      totalInterest: 50,
+    },
+  ],
+};
+
 export const data = {
   labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
   datasets: [
@@ -193,19 +250,25 @@ function PeerShareMenu({
 }
 
 function MemberCard({
-  username,
+  fullName,
   phoneNumber,
-  profilePicture,
+  avatar,
+  isLast,
 }: {
-  username: string;
+  fullName: string;
   phoneNumber: string;
-  profilePicture: string;
+  avatar: string;
+  isLast: boolean;
 }) {
   return (
-    <div className="flex flex-col justify-center items-center space-y-2 w-32 bg-white p-4 rounded-md shadow-sm">
-      <img className="w-16 h-16 rounded-2xl" src={profilePicture} alt="" />
+    <div
+      className={`flex flex-col justify-center items-center space-y-2 w-32 bg-white p-4 rounded-md shadow-sm ${
+        isLast ? "mr-8" : ""
+      }`}
+    >
+      <img className="w-16 h-16 rounded-2xl" src={avatar} alt="" />
       <div className="text-center">
-        <h3 className="font-medium text-base">{username}</h3>
+        <h3 className="font-medium text-base">{fullName}</h3>
         <p className="text-gray-400 text-[0.7rem]">{phoneNumber}</p>
       </div>
     </div>
@@ -213,16 +276,16 @@ function MemberCard({
 }
 
 function ContactCard({
-  username,
+  fullName,
   phoneNumber,
-  profilePicture,
+  avatar,
   credit,
   isUser,
   isContact,
 }: {
-  username: string;
+  fullName: string;
   phoneNumber: string;
-  profilePicture: string;
+  avatar: string;
   credit: string;
   isUser?: boolean;
   isContact?: boolean;
@@ -230,14 +293,10 @@ function ContactCard({
   return (
     <div className="flex justify-between items-center space-x-4 py-4 bg-white border-b-[1px]">
       <div className="flex items-center space-x-4">
-        <img
-          className="w-12 h-12 rounded-2xl"
-          src={profilePicture}
-          alt="profile"
-        />
+        <img className="w-12 h-12 rounded-2xl" src={avatar} alt="profile" />
         <div className="flex flex-col">
           <h3 className="font-medium">
-            {username} : {credit}
+            {fullName} : {credit}
           </h3>
           <p className="text-gray-400 text-[0.7rem]">{phoneNumber}</p>
         </div>
@@ -251,42 +310,47 @@ function ContactCard({
   );
 }
 
-function ContactList() {
+function ContactList({ members }: any) {
   return (
     <ul className="flex flex-col space-y-2">
-      <li>
-        <ContactCard
-          username="Hailey Sanders"
-          phoneNumber="+66 985 9385"
-          profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-          credit="A"
-        />
-      </li>
+      {members.map((member: any, index: number) => (
+        <li>
+          <ContactCard
+            fullName={member.fullName}
+            phoneNumber={member.phoneNumber}
+            avatar={member.avatar}
+            credit={member.credit}
+          />
+        </li>
+      ))}
     </ul>
   );
 }
 
-function MemberList() {
+function MemberList({ members }: any) {
   return (
     <ul className="flex space-x-4">
-      <li>
-        <MemberCard
-          username="Hailey Sanders"
-          phoneNumber="+66 985 9385"
-          profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-        />
-      </li>
+      {members.map((member: any, index: number) => (
+        <li>
+          <MemberCard
+            fullName={member.fullName}
+            phoneNumber={member.phoneNumber}
+            avatar={member.avatar}
+            isLast={members.length - 1 === index}
+          />
+        </li>
+      ))}
     </ul>
   );
 }
 
-function MemberTab() {
+function MemberTab({ members }: any) {
   return (
     <>
       <div className="grid pl-8 mt-8">
         <h2 className="text-xl font-medium">Member</h2>
         <div className="mt-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
-          <MemberList />
+          <MemberList members={members} />
         </div>
       </div>
 
@@ -320,7 +384,7 @@ function MemberTab() {
         </div>
 
         <div className="overflow-y-auto max-h-[50vh] whitespace-nowrap scrollbar-hide">
-          <ContactList />
+          <ContactList members={members} />
         </div>
       </div>
     </>
@@ -328,34 +392,34 @@ function MemberTab() {
 }
 
 function PoolMemberStatus({
-  username,
+  fullName,
   phoneNumber,
-  profilePicture,
+  avatar,
   credit,
-  status,
+  isWinner,
   ratio,
 }: {
-  username: string;
+  fullName: string;
   phoneNumber: string;
-  profilePicture: string;
+  avatar: string;
   credit: string;
-  status: string;
+  isWinner?: boolean;
   ratio?: string;
 }) {
   return (
     <div className="flex justify-between items-center space-x-4 py-4 border-b-[1px]">
       <div className="flex items-center space-x-4">
-        <img className="w-12 h-12 rounded-2xl" src={profilePicture} alt="" />
+        <img className="w-12 h-12 rounded-2xl" src={avatar} alt="" />
         <div className="flex flex-col">
           <h3 className="font-medium text-sm">
-            {username} : {credit}
+            {fullName} : {credit}
             {ratio && `(${ratio})`}
           </h3>
           <p className="text-gray-400 text-[0.7rem]">{phoneNumber}</p>
         </div>
       </div>
 
-      {status === "lent" ? (
+      {isWinner ? (
         <span className="w-20 h-6 bg-gray-200 text-gray-500 rounded-md outline-none font-extralight text-sm flex justify-center items-center capitalize">
           lent
         </span>
@@ -368,13 +432,21 @@ function PoolMemberStatus({
   );
 }
 
-function PoolTab() {
+function PoolTab({
+  members,
+  maxMember,
+  paymentTerm,
+  creditRequirement,
+  round,
+}: any) {
   return (
     <>
       <div className="grid px-8 mt-8">
         <div>
           <h1 className="text-xl font-medium">Pool</h1>
-          <span>5/500/B+</span>
+          <span>
+            {maxMember}/{paymentTerm}/{creditRequirement}
+          </span>
         </div>
         <Doughnut
           data={data}
@@ -398,29 +470,23 @@ function PoolTab() {
         />
       </div>
       <div className="grid px-8 mt-8 py-4 space-y-4">
-        <h2 className="text-xl font-medium">Round 3/5</h2>
+        <h2 className="text-xl font-medium">
+          Round {round}/{maxMember}
+        </h2>
         <div className="overflow-y-auto whitespace-nowrap scrollbar-hide">
           <ul className="flex flex-col space-y-2">
-            <li>
-              <PoolMemberStatus
-                username="Hailey Sanders"
-                phoneNumber="+66 985 9385"
-                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-                credit="A"
-                status="lent"
-                ratio="75/5"
-              />
-            </li>
-            <li>
-              <PoolMemberStatus
-                username="Hailey Sanders"
-                phoneNumber="+66 985 9385"
-                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-                credit="A"
-                status="bit-able"
-                ratio="75/5"
-              />
-            </li>
+            {members.map((member: any) => (
+              <li>
+                <PoolMemberStatus
+                  fullName={member.fullName}
+                  phoneNumber={member.phoneNumber}
+                  avatar={member.avatar}
+                  credit={member.credit}
+                  isWinner={member.isWinner}
+                  ratio="75/5"
+                />
+              </li>
+            ))}
           </ul>
         </div>
       </div>
@@ -500,16 +566,12 @@ function BidingAction({ onClose }: { onClose: () => void }) {
   );
 }
 
-function BidingMemberStatus({ profilePicture, username, isBidden }: any) {
+function BidingMemberStatus({ avatar, fullName, isBidden }: any) {
   return (
     <div className="flex justify-between items-center space-x-4 py-4 border-b-[1px]">
       <div className="flex items-center space-x-4">
-        <img
-          className="w-12 h-12 rounded-2xl"
-          src={profilePicture}
-          alt="profile"
-        />
-        <h3 className="font-medium text-sm">{username}</h3>
+        <img className="w-12 h-12 rounded-2xl" src={avatar} alt="profile" />
+        <h3 className="font-medium text-sm">{fullName}</h3>
       </div>
 
       {isBidden ? (
@@ -525,62 +587,42 @@ function BidingMemberStatus({ profilePicture, username, isBidden }: any) {
   );
 }
 
-function BidingMemberList() {
+function BidingMemberList({ members }: any) {
   return (
     <ul className="flex flex-col space-y-2">
-      <li>
-        <BidingMemberStatus
-          profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-          username="Hailey Sanders"
-          isBidden={true}
-        />
-      </li>
-      <li>
-        <BidingMemberStatus
-          profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-          username="Hailey Sanders"
-          isBidden={false}
-        />
-      </li>
-      <li>
-        <BidingMemberStatus
-          profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-          username="Hailey Sanders"
-          isBidden={false}
-        />
-      </li>
-      <li>
-        <BidingMemberStatus
-          profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-          username="Hailey Sanders"
-          isBidden={false}
-        />
-      </li>
-      <li>
-        <BidingMemberStatus
-          profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-          username="Hailey Sanders"
-          isBidden={false}
-        />
-      </li>
-      <li>
-        <BidingMemberStatus
-          profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-          username="Hailey Sanders"
-          isBidden={false}
-        />
-      </li>
+      {members.map((member: any) => (
+        <>
+          {!member.isWinner && (
+            <li>
+              <BidingMemberStatus
+                avatar={member.avatar}
+                fullName={member.fullName}
+                isBidden={member.isBidden}
+              />
+            </li>
+          )}
+        </>
+      ))}
     </ul>
   );
 }
 
-function BidingTab() {
-  const [isAllPaid, setIsAllPaid] = useState(true);
+function BidingTab({ members }: any) {
   const [isBidding, setIsBidding] = useState(false);
   const [isBidden, setIsBidden] = useState(false);
 
+  const isAllPaid = members.every((member: any) => member.isPaid);
+  const countPaid = members.filter((member: any) => member.isPaid).length;
+
   const handleClose = () => {
     setIsBidding(false);
+  };
+
+  const handleBidding = () => {
+    setIsBidding(true);
+    setIsBidden(true);
+
+    // TODO: call api to start bidding
   };
 
   return (
@@ -597,14 +639,11 @@ function BidingTab() {
               </span>
             </p>
             <div className="relative max-h-[45vh] overflow-y-auto whitespace-nowrap scrollbar-hide">
-              <BidingMemberList />
+              <BidingMemberList members={members} />
             </div>
 
             <button
-              onClick={() => {
-                setIsBidding(true);
-                setIsBidden(true);
-              }}
+              onClick={handleBidding}
               className="bg-[#7C6EFF] bottom-0 text-white rounded-xl py-4 px-8 w-full mt-8"
             >
               {isBidden ? "Change Bid Rate" : "Start Bid"}
@@ -624,7 +663,7 @@ function BidingTab() {
 
             <div className="w-full bg-lightpurple p-4 rounded-2xl capitalize text-white">
               <p className="text-xl font-bold text-center">
-                {1} / {5} members have paid
+                {countPaid} / {members.length} members have paid
               </p>
               <p className="text-md text-center">
                 time left to pay{" "}
@@ -640,36 +679,48 @@ function BidingTab() {
   );
 }
 
-function PaymentTab() {
+function PaymentTab({
+  creditRequirement,
+  paymentTerm,
+  interest,
+  term,
+  totalTerm,
+  totalInterest,
+  totalInterestPerset,
+  dueDate,
+  avatar,
+}: any) {
   return (
     <>
       <div className="grid px-8 -mt-8 pt-12 space-y-4 pb-4 bg-lightpurple min-h-screen">
         <div className="bg-white rounded-3xl p-4 space-y-8">
           <div>
             <h1 className="text-xl font-bold">Pool</h1>
-            <p>5/500/B+</p>
+            <p>
+              {totalTerm}/{paymentTerm}/{creditRequirement}
+            </p>
           </div>
 
           <div className="text-sm">
             <div className="flex justify-between">
               <span>Payment term</span>
-              <span>Bath 500</span>
+              <span>Bath {paymentTerm}</span>
             </div>
             <div className="flex justify-between">
               <span>Interest</span>
-              <span>Bath 50</span>
+              <span>Bath {interest}</span>
             </div>
             <div className="flex justify-between">
               <span>Tern</span>
-              <span>No. Round 2</span>
+              <span>No. Round {term}</span>
             </div>
             <div className="flex justify-between">
               <span>Total Interest</span>
-              <span>Bath 100</span>
+              <span>Bath {totalInterest}</span>
             </div>
             <div className="flex justify-between">
               <span>Total Interest (%)</span>
-              <span>20% / year</span>
+              <span>{totalInterestPerset}% / year</span>
             </div>
           </div>
 
@@ -677,7 +728,7 @@ function PaymentTab() {
             <p className="text-sm">Total Payment this item</p>
             <p className="text-3xl">Bath 550</p>
             <p className="text-sm">
-              Due date: <span className="text-gray-400">before 31/01/2566</span>
+              Due date: <span className="text-gray-400">before {dueDate}</span>
             </p>
           </div>
 
@@ -837,11 +888,7 @@ function PaymentTab() {
         </div>
         <div className="bg-white rounded-3xl space-y-4 p-4">
           <div className="flex border-b pb-4 space-x-4 border-dashed">
-            <img
-              className="w-12 h-12 rounded-2xl"
-              src="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-              alt=""
-            />
+            <img className="w-12 h-12 rounded-2xl" src={avatar} alt="" />
             <div>
               <p className="text-gray-400 text-[0.6rem]">Profile name</p>
               <p className="text-lg font-medium">You</p>
@@ -1301,7 +1348,9 @@ function PaymentTab() {
             </svg>
           </div>
 
-          <p className="font-bold text-3xl text-center">Baht 550</p>
+          <p className="font-bold text-3xl text-center">
+            Baht {paymentTerm + interest}
+          </p>
         </div>
 
         <button className="w-full py-3 font-bold text-lightpurple bg-white rounded-lg">
@@ -1313,7 +1362,7 @@ function PaymentTab() {
 }
 
 export default function PeerShareRoom() {
-  const [activeTab, setActiveTab] = React.useState(0);
+  const [activeTab, setActiveTab] = useState(0);
 
   const handleTabClick = (tab: number) => {
     setActiveTab(tab);
@@ -1322,15 +1371,37 @@ export default function PeerShareRoom() {
   const RenderPeerShareTab = () => {
     switch (activeTab) {
       case 0:
-        return <MemberTab />;
+        return <MemberTab members={PeerShareRoomData.members} />;
       case 1:
-        return <PoolTab />;
+        return (
+          <PoolTab
+            creditRequirement={PeerShareRoomData.creditRequirement}
+            paymentTerm={PeerShareRoomData.paymentTerm}
+            maxMember={PeerShareRoomData.maxMember}
+            round={PeerShareRoomData.round}
+            members={PeerShareRoomData.members}
+          />
+        );
       case 2:
-        return <BidingTab />;
+        return <BidingTab members={PeerShareRoomData.members} />;
       case 3:
-        return <PaymentTab />;
+        return (
+          <PaymentTab
+            creditRequirement={PeerShareRoomData.creditRequirement}
+            paymentTerm={PeerShareRoomData.paymentTerm}
+            interest={PeerShareRoomData.members[2].interest}
+            term={PeerShareRoomData.round}
+            totalTerm={PeerShareRoomData.maxMember}
+            totalInterest={PeerShareRoomData.members[2].totalInterest}
+            totalInterestPerset={
+              (PeerShareRoomData.members[2].totalInterest * 100) /
+              PeerShareRoomData.paymentTerm
+            }
+            avatar={PeerShareRoomData.members[2].avatar} 
+          />
+        );
       default:
-        return <MemberTab />;
+        return <MemberTab members={PeerShareRoomData.members} />;
     }
 
     return null;
