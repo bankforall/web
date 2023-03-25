@@ -23,8 +23,8 @@ const PeerShareRoomData = {
   members: [
     {
       id: "1",
-      username: "John Doe",
-      avartar: "https://picsum.photos/200",
+      fullName: "John Doe",
+      avatar: "https://picsum.photos/200",
       credit: "A",
       phoneNumber: "0123456789",
       isBidden: true,
@@ -36,8 +36,8 @@ const PeerShareRoomData = {
     },
     {
       id: "2",
-      username: "John Doe 2",
-      avartar: "https://picsum.photos/200",
+      fullName: "John Doe 2",
+      avatar: "https://picsum.photos/200",
       credit: "B",
       phoneNumber: "0123456789",
       isBidden: false,
@@ -49,9 +49,9 @@ const PeerShareRoomData = {
     },
     {
       id: "3",
-      username: "John Doe 3",
+      fullName: "John Doe 3",
       credit: "B+",
-      avartar: "https://picsum.photos/200",
+      avatar: "https://picsum.photos/200",
       phoneNumber: "0123456789",
       isBidden: false,
       isPaid: true,
@@ -250,14 +250,14 @@ function PeerShareMenu({
 }
 
 function MemberCard({
-  username,
+  fullName,
   phoneNumber,
-  avartar,
+  avatar,
   isLast,
 }: {
-  username: string;
+  fullName: string;
   phoneNumber: string;
-  avartar: string;
+  avatar: string;
   isLast: boolean;
 }) {
   return (
@@ -266,9 +266,9 @@ function MemberCard({
         isLast ? "mr-8" : ""
       }`}
     >
-      <img className="w-16 h-16 rounded-2xl" src={avartar} alt="" />
+      <img className="w-16 h-16 rounded-2xl" src={avatar} alt="" />
       <div className="text-center">
-        <h3 className="font-medium text-base">{username}</h3>
+        <h3 className="font-medium text-base">{fullName}</h3>
         <p className="text-gray-400 text-[0.7rem]">{phoneNumber}</p>
       </div>
     </div>
@@ -276,16 +276,16 @@ function MemberCard({
 }
 
 function ContactCard({
-  username,
+  fullName,
   phoneNumber,
-  avartar,
+  avatar,
   credit,
   isUser,
   isContact,
 }: {
-  username: string;
+  fullName: string;
   phoneNumber: string;
-  avartar: string;
+  avatar: string;
   credit: string;
   isUser?: boolean;
   isContact?: boolean;
@@ -293,10 +293,10 @@ function ContactCard({
   return (
     <div className="flex justify-between items-center space-x-4 py-4 bg-white border-b-[1px]">
       <div className="flex items-center space-x-4">
-        <img className="w-12 h-12 rounded-2xl" src={avartar} alt="profile" />
+        <img className="w-12 h-12 rounded-2xl" src={avatar} alt="profile" />
         <div className="flex flex-col">
           <h3 className="font-medium">
-            {username} : {credit}
+            {fullName} : {credit}
           </h3>
           <p className="text-gray-400 text-[0.7rem]">{phoneNumber}</p>
         </div>
@@ -316,9 +316,9 @@ function ContactList({ members }: any) {
       {members.map((member: any, index: number) => (
         <li>
           <ContactCard
-            username={member.username}
+            fullName={member.fullName}
             phoneNumber={member.phoneNumber}
-            avartar={member.avartar}
+            avatar={member.avatar}
             credit={member.credit}
           />
         </li>
@@ -333,9 +333,9 @@ function MemberList({ members }: any) {
       {members.map((member: any, index: number) => (
         <li>
           <MemberCard
-            username={member.username}
+            fullName={member.fullName}
             phoneNumber={member.phoneNumber}
-            avartar={member.avartar}
+            avatar={member.avatar}
             isLast={members.length - 1 === index}
           />
         </li>
@@ -392,16 +392,16 @@ function MemberTab({ members }: any) {
 }
 
 function PoolMemberStatus({
-  username,
+  fullName,
   phoneNumber,
-  avartar,
+  avatar,
   credit,
   isWinner,
   ratio,
 }: {
-  username: string;
+  fullName: string;
   phoneNumber: string;
-  avartar: string;
+  avatar: string;
   credit: string;
   isWinner?: boolean;
   ratio?: string;
@@ -409,10 +409,10 @@ function PoolMemberStatus({
   return (
     <div className="flex justify-between items-center space-x-4 py-4 border-b-[1px]">
       <div className="flex items-center space-x-4">
-        <img className="w-12 h-12 rounded-2xl" src={avartar} alt="" />
+        <img className="w-12 h-12 rounded-2xl" src={avatar} alt="" />
         <div className="flex flex-col">
           <h3 className="font-medium text-sm">
-            {username} : {credit}
+            {fullName} : {credit}
             {ratio && `(${ratio})`}
           </h3>
           <p className="text-gray-400 text-[0.7rem]">{phoneNumber}</p>
@@ -478,9 +478,9 @@ function PoolTab({
             {members.map((member: any) => (
               <li>
                 <PoolMemberStatus
-                  username={member.username}
+                  fullName={member.fullName}
                   phoneNumber={member.phoneNumber}
-                  avartar={member.avartar}
+                  avatar={member.avatar}
                   credit={member.credit}
                   isWinner={member.isWinner}
                   ratio="75/5"
@@ -566,12 +566,12 @@ function BidingAction({ onClose }: { onClose: () => void }) {
   );
 }
 
-function BidingMemberStatus({ avartar, username, isBidden }: any) {
+function BidingMemberStatus({ avatar, fullName, isBidden }: any) {
   return (
     <div className="flex justify-between items-center space-x-4 py-4 border-b-[1px]">
       <div className="flex items-center space-x-4">
-        <img className="w-12 h-12 rounded-2xl" src={avartar} alt="profile" />
-        <h3 className="font-medium text-sm">{username}</h3>
+        <img className="w-12 h-12 rounded-2xl" src={avatar} alt="profile" />
+        <h3 className="font-medium text-sm">{fullName}</h3>
       </div>
 
       {isBidden ? (
@@ -595,8 +595,8 @@ function BidingMemberList({ members }: any) {
           {!member.isWinner && (
             <li>
               <BidingMemberStatus
-                avartar={member.avartar}
-                username={member.username}
+                avatar={member.avatar}
+                fullName={member.fullName}
                 isBidden={member.isBidden}
               />
             </li>
@@ -611,10 +611,7 @@ function BidingTab({ members }: any) {
   const [isBidding, setIsBidding] = useState(false);
   const [isBidden, setIsBidden] = useState(false);
 
-  // if members is isPaid all return true
   const isAllPaid = members.every((member: any) => member.isPaid);
-
-  // count how many members isPaid
   const countPaid = members.filter((member: any) => member.isPaid).length;
 
   const handleClose = () => {
@@ -691,6 +688,7 @@ function PaymentTab({
   totalInterest,
   totalInterestPerset,
   dueDate,
+  avatar,
 }: any) {
   return (
     <>
@@ -890,11 +888,7 @@ function PaymentTab({
         </div>
         <div className="bg-white rounded-3xl space-y-4 p-4">
           <div className="flex border-b pb-4 space-x-4 border-dashed">
-            <img
-              className="w-12 h-12 rounded-2xl"
-              src="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-              alt=""
-            />
+            <img className="w-12 h-12 rounded-2xl" src={avatar} alt="" />
             <div>
               <p className="text-gray-400 text-[0.6rem]">Profile name</p>
               <p className="text-lg font-medium">You</p>
@@ -1403,6 +1397,7 @@ export default function PeerShareRoom() {
               (PeerShareRoomData.members[2].totalInterest * 100) /
               PeerShareRoomData.paymentTerm
             }
+            avatar={PeerShareRoomData.members[2].avatar} 
           />
         );
       default:

@@ -1,5 +1,7 @@
 import React from "react";
 import { PeerShareRoom } from "@/model/peerShareRoom";
+import BaseLayout from "@/components/BaseLayout";
+
 const PeerSharingDashboard = () => {
   let peerShareRoomList: PeerShareRoom[] = [];
   let microFinanceAmount = 10000;
@@ -44,19 +46,14 @@ const PeerSharingDashboard = () => {
   } as PeerShareRoom);
 
   return (
-    <div>
-      <div className="bg-lightpurple rounded-bl-3xl rounded-br-3xl py-4 px-8">
+    <BaseLayout>
+      <div className="bg-lightpurple rounded-bl-3xl rounded-br-3xl space-y-4 py-4 px-8">
+        <h1 className="text-white font-medium my-8 text-center">Peer Share</h1>
+        <h3 className="text-white font-medium text-3xl text-center">
+          Bath {peerShareAmount}
+        </h3>
+        <div className="border-b-[2px]"></div>
         <div>
-          <h1 className="text-white font-medium my-2 text-center">
-            Peer Share
-          </h1>
-          <h3 className="text-white font-medium text-center">
-            {peerShareAmount}
-          </h3>
-          <div
-            className="break-line text-black w-full bg-white my-2"
-            style={{ height: 3 }}
-          ></div>
           <h5 className="text-white font-medium text-center">
             Current D/E = {currentDeptEquity}
           </h5>
@@ -65,77 +62,66 @@ const PeerSharingDashboard = () => {
           </h5>
         </div>
       </div>
-      {/*//create a modal that loops peerShareRoomList and displays all value in the object*/}
-      <div className="modal fade" id="peerShareRoomModal" tabIndex={-1}>
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="justify-center flex">
-              <button
-                type="button"
-                className="mt-2 w-80 modal-header border-8 border-lightpurple bg-lightpurple text-white rounded-3xl mx-5 text-center"
-                // className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              >
-                Create Room
-              </button>
-            </div>
-            <div className="modal-body">
-              <div className="modal-body">
-                {peerShareRoomList.map((room) => (
-                  <div
-                    key={room.roomName}
-                    className="flex flex-row border-4 rounded-3xl border-gray-500 p-4 mx-5 mt-2 mb-4"
-                  >
-                    <div className="w-3/4">
-                      <h3>Room Name: {room.roomName}</h3>
-                      <h6>Capacity: {room.maxMember + ""}</h6>
-                      <p>Type: {room.peerShareType}</p>
-                      <p>Payment per round: {room.payment + ""}</p>
-                    </div>
-                    <div className="justify-center flex align-middle w-1/4">
-                      {room.roomType === "public" ? (
-                        <button
-                          style={{
-                            backgroundColor: room.joinable
-                              ? "mediumpurple"
-                              : "gray",
-                          }}
-                          className="mt-2 w-80 h-3/4 modal-header border-8  text-white rounded-3xl mx-5 text-center"
-                        >
-                          JOIN
-                        </button>
-                      ) : (
-                        <button
-                          style={{
-                            backgroundColor: room.joinable
-                              ? "mediumpurple"
-                              : "gray",
-                          }}
-                          className="mt-2 w-80 h-3/4 modal-header border-8  text-white rounded-3xl mx-5 text-center"
-                        >
-                          LOCKED
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      {/* Button to trigger the modal */}
-      {/*<button*/}
-      {/*    type="button"*/}
-      {/*    className="btn btn-primary"*/}
-      {/*    data-bs-toggle="modal"*/}
-      {/*    data-bs-target="#peerShareRoomModal"*/}
-      {/*>*/}
-      {/*    View Peer Share Rooms*/}
-      {/*</button>*/}
-    </div>
+      <div className="flex flex-col px-8 py-4 space-y-4">
+        <button
+          type="button"
+          className="my-4 text-lightpurple border-b border-dashed text-right pb-2"
+        >
+          Create Room
+        </button>
+        <ul className="space-y-4 grid">
+          {peerShareRoomList.map((room) => (
+            <li
+              key={room.roomName}
+              className="flex justify-between items-center rounded-md bg-white p-4 shadow-md"
+            >
+              <div>
+                <h3 className="text-sm font-medium">
+                  Room Name: {room.roomName}
+                </h3>
+                <h6 className="text-sm font-medium">
+                  Members: {0 + ""} / {room.maxMember + ""}
+                </h6>
+                <h6 className="text-sm font-medium">
+                  Credit: {room.minimumCredit}
+                </h6>
+                <p className="text-sm font-medium">
+                  Type: {room.peerShareType}
+                </p>
+                <div className="relative h-24">
+                  <p className="absolute z-20 bottom-0 flex items-center h-7 w-48 text-sm rounded-full bg-lightpurple pl-4 text-white font-bold">
+                    Pool: Bath {room.payment + ""}
+                  </p>
+                  <p className="absolute z-10 bottom-0 h-[27px] w-72 flex justify-end items-center text-sm rounded-full border-dashed border-[1px] bg-gray-200 text-gray-400 font-bol pr-2">
+                    Bath: {room.payment + ""}
+                  </p>
+                </div>
+              </div>
+              {room.roomType === "public" ? (
+                <button
+                  className="rounded-md px-4 py-2 text-white"
+                  style={{
+                    backgroundColor: room.joinable ? "mediumpurple" : "gray",
+                  }}
+                >
+                  JOIN
+                </button>
+              ) : (
+                <button
+                  className="rounded-md  px-4 py-2 text-white"
+                  style={{
+                    backgroundColor: room.joinable ? "mediumpurple" : "gray",
+                  }}
+                >
+                  LOCKED
+                </button>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </BaseLayout>
   );
 };
 export default PeerSharingDashboard;
