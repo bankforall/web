@@ -3,7 +3,7 @@ import BaseLayout from "@/components/BaseLayout";
 import {Link} from "react-router-dom";
 import {getSummary} from "@/service/summary.service";
 import {MainDashboardSummary} from "@/model/summary";
-import {deposit} from "@/service/account-transaction.service";
+import {deposit, withdraw} from "@/service/account-transaction.service";
 const Dashboard: FC = () => {
   const [data, setData] = useState({
     mainSummary: {
@@ -17,7 +17,6 @@ const Dashboard: FC = () => {
   useEffect(() => {
     async function fetchData() {
       const response = await getSummary();
-      console.log('ressss', response);
       setData({mainSummary: response});
     }
 
@@ -35,15 +34,31 @@ const Dashboard: FC = () => {
    depositMoney()
   }
 
+  function withdrawMoneyButtonClick() {
+    withdrawMoney()
+  }
+
   async function depositMoney(): Promise<void> {
-    console.count('deposit')
     const response = await deposit(1000);
     if (response) {
-      data.mainSummary.balance += 1000;
-      setData(data)
-      alert('amount added: 1000');
+      const newBalance = parseInt(data.mainSummary.balance) + 1000;
+      const newMainSummary = {...data.mainSummary, balance: newBalance.toString()};
+      setData({mainSummary: newMainSummary});
     } else {
       alert('fail something something');
+    }
+  }
+
+
+  async function withdrawMoney(): Promise<void> {
+    const response = await withdraw(1000);
+    console.log('with',response)
+    if (response) {
+      const newBalance = parseInt(data.mainSummary.balance) - 1000;
+      const newMainSummary = {...data.mainSummary, balance: newBalance.toString()};
+      setData({mainSummary: newMainSummary});
+    } else {
+      alert('Insufficient balance');
     }
   }
 
@@ -100,7 +115,7 @@ const Dashboard: FC = () => {
             <span className="mx-2">Add money (1000)</span>
           </button>
 
-          <button className="bg-[#FFF1D1] hover:bg-gray-400 text-gray-800 font-semibold py-2 px-3 rounded inline-flex items-center">
+          <button onClick={withdrawMoneyButtonClick} className="bg-[#FFF1D1] hover:bg-gray-400 text-gray-800 font-semibold py-2 px-3 rounded inline-flex items-center">
             <svg
               width="30"
               height="30"
@@ -137,7 +152,7 @@ const Dashboard: FC = () => {
                 fill="#FD9101"
               />
             </svg>
-            <span className="mx-2">Withdraw</span>
+            <span className="mx-2">Withdraw (1000)</span>
           </button>
         </div>
         <div className="space-y-3">
