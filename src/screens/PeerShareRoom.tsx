@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import BaseLayout from "@/components/BaseLayout";
-
+import CountdownTimer from "@/components/CountdownTimer";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 
@@ -230,7 +230,11 @@ function ContactCard({
   return (
     <div className="flex justify-between items-center space-x-4 py-4 bg-white border-b-[1px]">
       <div className="flex items-center space-x-4">
-        <img className="w-12 h-12 rounded-2xl" src={profilePicture} alt="" />
+        <img
+          className="w-12 h-12 rounded-2xl"
+          src={profilePicture}
+          alt="profile"
+        />
         <div className="flex flex-col">
           <h3 className="font-medium">
             {username} : {credit}
@@ -247,49 +251,42 @@ function ContactCard({
   );
 }
 
+function ContactList() {
+  return (
+    <ul className="flex flex-col space-y-2">
+      <li>
+        <ContactCard
+          username="Hailey Sanders"
+          phoneNumber="+66 985 9385"
+          profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+          credit="A"
+        />
+      </li>
+    </ul>
+  );
+}
+
+function MemberList() {
+  return (
+    <ul className="flex space-x-4">
+      <li>
+        <MemberCard
+          username="Hailey Sanders"
+          phoneNumber="+66 985 9385"
+          profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+        />
+      </li>
+    </ul>
+  );
+}
+
 function MemberTab() {
   return (
     <>
       <div className="grid pl-8 mt-8">
         <h2 className="text-xl font-medium">Member</h2>
         <div className="mt-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
-          <ul className="flex space-x-4 ">
-            <li>
-              <MemberCard
-                username="Hailey Sanders"
-                phoneNumber="+66 985 9385"
-                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-              />
-            </li>
-            <li>
-              <MemberCard
-                username="Zayn Michel"
-                phoneNumber="+66 985 9385"
-                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-              />
-            </li>
-            <li>
-              <MemberCard
-                username="Thomas Denver"
-                phoneNumber="+66 985 9385"
-                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-              />
-            </li>
-            <li>
-              <MemberCard
-                username="Sherry Blossom"
-                phoneNumber="+66 985 9385"
-                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-              />
-            </li>
-            <li className="pr-8">
-              <MemberCard
-                username="You"
-                phoneNumber="+66 985 9385"
-                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-              />
-            </li>
-          </ul>
+          <MemberList />
         </div>
       </div>
 
@@ -323,58 +320,14 @@ function MemberTab() {
         </div>
 
         <div className="overflow-y-auto max-h-[50vh] whitespace-nowrap scrollbar-hide">
-          <ul className="flex flex-col space-y-2">
-            <li>
-              <ContactCard
-                username="Hailey Sanders"
-                phoneNumber="+66 985 9385"
-                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-                credit="A"
-              />
-            </li>
-            <li>
-              <ContactCard
-                username="Zayn Michel"
-                phoneNumber="+66 985 9385"
-                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-                credit="B+"
-              />
-            </li>
-            <li>
-              <ContactCard
-                username="Thomas Denver"
-                phoneNumber="+66 985 9385"
-                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-                credit="B+"
-                isContact={true}
-              />
-            </li>
-            <li>
-              <ContactCard
-                username="Sherry Blossom"
-                phoneNumber="+66 985 9385"
-                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-                credit="A"
-                isContact={true}
-              />
-            </li>
-            <li>
-              <ContactCard
-                username="You"
-                phoneNumber="+66 985 9385"
-                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-                credit="A"
-                isUser={true}
-              />
-            </li>
-          </ul>
+          <ContactList />
         </div>
       </div>
     </>
   );
 }
 
-function PoolMemberAction({
+function PoolMemberStatus({
   username,
   phoneNumber,
   profilePicture,
@@ -401,14 +354,16 @@ function PoolMemberAction({
           <p className="text-gray-400 text-[0.7rem]">{phoneNumber}</p>
         </div>
       </div>
-      <button
-        className="w-20 h-10 rounded-lg outline-none font-extralight text-sm text-white"
-        style={{
-          backgroundColor: status === "lent" ? "#9EA6BE" : "#6DC82A",
-        }}
-      >
-        {status === "lent" ? "Lent" : "Bid-able"}
-      </button>
+
+      {status === "lent" ? (
+        <span className="w-20 h-6 bg-gray-200 text-gray-500 rounded-md outline-none font-extralight text-sm flex justify-center items-center capitalize">
+          lent
+        </span>
+      ) : (
+        <span className="w-20 h-6 bg-green-200 text-green-500 rounded-md outline-none font-extralight text-sm flex justify-center items-center capitalize">
+          Bid-able
+        </span>
+      )}
     </div>
   );
 }
@@ -447,7 +402,7 @@ function PoolTab() {
         <div className="overflow-y-auto whitespace-nowrap scrollbar-hide">
           <ul className="flex flex-col space-y-2">
             <li>
-              <PoolMemberAction
+              <PoolMemberStatus
                 username="Hailey Sanders"
                 phoneNumber="+66 985 9385"
                 profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
@@ -457,40 +412,13 @@ function PoolTab() {
               />
             </li>
             <li>
-              <PoolMemberAction
-                username="Zayn Michel"
-                phoneNumber="+66 985 9385"
-                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-                credit="B+"
-                status="lent"
-                ratio="75/4"
-              />
-            </li>
-            <li>
-              <PoolMemberAction
-                username="Thomas Denver"
-                phoneNumber="+66 985 9385"
-                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-                credit="B+"
-                status="bid-able"
-              />
-            </li>
-            <li>
-              <PoolMemberAction
-                username="Sherry Blossom"
+              <PoolMemberStatus
+                username="Hailey Sanders"
                 phoneNumber="+66 985 9385"
                 profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
                 credit="A"
-                status="bid-able"
-              />
-            </li>
-            <li>
-              <PoolMemberAction
-                username="You"
-                phoneNumber="+66 985 9385"
-                profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
-                credit="A"
-                status="bid-able"
+                status="bit-able"
+                ratio="75/5"
               />
             </li>
           </ul>
@@ -500,56 +428,213 @@ function PoolTab() {
   );
 }
 
+function BidingAction({ onClose }: { onClose: () => void }) {
+  const [bidRate, setBidRate] = useState(0);
+
+  const handleBidRate = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (Number(e.target.value) < 0) {
+      return;
+    }
+
+    setBidRate(Number(e.target.value));
+  };
+
+  const handleConfirm = () => {
+    onClose();
+    alert(`Confirm: ${bidRate}`);
+  };
+
+  return (
+    <div className="absolute bottom-2 right-4 left-4 grid p-8 mt-8 z-30 bg-white rounded-xl shadow-2xl">
+      <div className="py-2 border-b mb-8">
+        <h1 className="text-xl font-medium">
+          Biding /{" "}
+          <span className="text-[#979797] text-sm">Ending date 31/01/2566</span>
+        </h1>
+      </div>
+      <div className="text-sm">
+        <div className="flex justify-between">
+          <span>Payment term</span>
+          <span>Bath 500</span>
+        </div>
+        <div className="flex justify-between">
+          <span>Interest</span>
+          <span>Bath {bidRate}</span>
+        </div>
+        <div className="flex justify-between">
+          <span>Tern</span>
+          <span>No. Round 2</span>
+        </div>
+        <div className="flex justify-between">
+          <span>Total Interest</span>
+          <span>Bath 100</span>
+        </div>
+        <div className="flex justify-between">
+          <span>Total Interest (%)</span>
+          <span>20% / year</span>
+        </div>
+      </div>
+      <div className="mt-8 space-y-10">
+        <div className="flex justify-between items-center">
+          <span className="text-center mr-8 text-3xl text-light font-medium">
+            Bath
+          </span>
+          <input
+            className="text-3xl text-center font-medium w-[50%] bg-transparent border-b outline-none"
+            placeholder="0"
+            value={
+              Math.round((bidRate + Number.EPSILON) * 100) / 100 || undefined
+            }
+            onChange={handleBidRate}
+            type="number"
+          />
+        </div>
+        <button
+          onClick={handleConfirm}
+          className="bg-[#7C6EFF] text-white rounded-xl py-4 px-8 w-full"
+        >
+          Confirm
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function BidingMemberStatus({ profilePicture, username, isBidden }: any) {
+  return (
+    <div className="flex justify-between items-center space-x-4 py-4 border-b-[1px]">
+      <div className="flex items-center space-x-4">
+        <img
+          className="w-12 h-12 rounded-2xl"
+          src={profilePicture}
+          alt="profile"
+        />
+        <h3 className="font-medium text-sm">{username}</h3>
+      </div>
+
+      {isBidden ? (
+        <span className="w-20 h-6 bg-green-200 text-green-500 rounded-md outline-none font-extralight text-sm flex justify-center items-center capitalize">
+          Bidden
+        </span>
+      ) : (
+        <span className="min-w-20 px-3 h-6 bg-gray-200 text-gray-500 rounded-md outline-none font-extralight text-sm flex justify-center items-center capitalize">
+          waiting for bid
+        </span>
+      )}
+    </div>
+  );
+}
+
+function BidingMemberList() {
+  return (
+    <ul className="flex flex-col space-y-2">
+      <li>
+        <BidingMemberStatus
+          profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+          username="Hailey Sanders"
+          isBidden={true}
+        />
+      </li>
+      <li>
+        <BidingMemberStatus
+          profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+          username="Hailey Sanders"
+          isBidden={false}
+        />
+      </li>
+      <li>
+        <BidingMemberStatus
+          profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+          username="Hailey Sanders"
+          isBidden={false}
+        />
+      </li>
+      <li>
+        <BidingMemberStatus
+          profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+          username="Hailey Sanders"
+          isBidden={false}
+        />
+      </li>
+      <li>
+        <BidingMemberStatus
+          profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+          username="Hailey Sanders"
+          isBidden={false}
+        />
+      </li>
+      <li>
+        <BidingMemberStatus
+          profilePicture="https://th-thumbnailer.cdn-si-edu.com/bZAar59Bdm95b057iESytYmmAjI=/1400x1050/filters:focal(594x274:595x275)/https://tf-cmsv2-smithsonianmag-media.s3.amazonaws.com/filer/95/db/95db799b-fddf-4fde-91f3-77024442b92d/egypt_kitty_social.jpg"
+          username="Hailey Sanders"
+          isBidden={false}
+        />
+      </li>
+    </ul>
+  );
+}
+
 function BidingTab() {
+  const [isAllPaid, setIsAllPaid] = useState(true);
+  const [isBidding, setIsBidding] = useState(false);
+  const [isBidden, setIsBidden] = useState(false);
+
+  const handleClose = () => {
+    setIsBidding(false);
+  };
+
   return (
     <>
-      <div className="grid px-8 mt-8">
-        <div className="py-2 border-b mb-8">
-          <h1 className="text-xl font-medium">
-            Biding /{" "}
-            <span className="text-[#979797] text-sm">
-              Ending date 31/01/2566
-            </span>
-          </h1>
-        </div>
-        <div className="text-sm">
-          <div className="flex justify-between">
-            <span>Payment term</span>
-            <span>Bath 500</span>
+      <div className="relative flex flex-col px-8 pb-8 mt-8 z-0">
+        {isBidding && <BidingAction onClose={handleClose} />}
+        <h3 className="text-xl font-medium">Biding</h3>
+        {isAllPaid ? (
+          <>
+            <p className="capitalize text-sm py-2">
+              timeout in{" "}
+              <span className="font-bold">
+                <CountdownTimer targetDate={new Date("2023-03-26")} />
+              </span>
+            </p>
+            <div className="relative max-h-[45vh] overflow-y-auto whitespace-nowrap scrollbar-hide">
+              <BidingMemberList />
+            </div>
+
+            <button
+              onClick={() => {
+                setIsBidding(true);
+                setIsBidden(true);
+              }}
+              className="bg-[#7C6EFF] bottom-0 text-white rounded-xl py-4 px-8 w-full mt-8"
+            >
+              {isBidden ? "Change Bid Rate" : "Start Bid"}
+            </button>
+          </>
+        ) : (
+          <div className="text-md space-y-8">
+            <div className="space-y-4">
+              <p className="text-sm">
+                All members must pay before bidding can begin. please wait.
+              </p>
+              <p className="text-sm text-red-700">
+                if have any member who not pay, before bidding can begin, this
+                pool will be canceled.
+              </p>
+            </div>
+
+            <div className="w-full bg-lightpurple p-4 rounded-2xl capitalize text-white">
+              <p className="text-xl font-bold text-center">
+                {1} / {5} members have paid
+              </p>
+              <p className="text-md text-center">
+                time left to pay{" "}
+                <span className="font-bold">
+                  <CountdownTimer targetDate={new Date("2023-03-26")} />
+                </span>
+              </p>
+            </div>
           </div>
-          <div className="flex justify-between">
-            <span>Interest</span>
-            <span>Bath 50</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Tern</span>
-            <span>No. Round 2</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Total Interest</span>
-            <span>Bath 100</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Total Interest (%)</span>
-            <span>20% / year</span>
-          </div>
-        </div>
-        <div className="mt-8 space-y-10">
-          <div className="flex justify-between items-center">
-            <span className="text-center mr-8 text-3xl text-light font-medium">
-              Bath
-            </span>
-            <input
-              className="text-3xl text-center font-medium w-[50%] bg-transparent border-b outline-none"
-              placeholder="50"
-              value={50}
-              type="text"
-            />
-          </div>
-          <button className="bg-[#7C6EFF] text-white rounded-xl py-4 px-8 w-full">
-            Confirm
-          </button>
-        </div>
+        )}
       </div>
     </>
   );
@@ -1234,13 +1319,27 @@ export default function PeerShareRoom() {
     setActiveTab(tab);
   };
 
+  const RenderPeerShareTab = () => {
+    switch (activeTab) {
+      case 0:
+        return <MemberTab />;
+      case 1:
+        return <PoolTab />;
+      case 2:
+        return <BidingTab />;
+      case 3:
+        return <PaymentTab />;
+      default:
+        return <MemberTab />;
+    }
+
+    return null;
+  };
+
   return (
     <BaseLayout>
       <PeerShareMenu onActiveTab={handleTabClick} activeTab={activeTab} />
-      {activeTab === 0 && <MemberTab />}
-      {activeTab === 1 && <PoolTab />}
-      {activeTab === 2 && <BidingTab />}
-      {activeTab === 3 && <PaymentTab />}
+      <RenderPeerShareTab />
     </BaseLayout>
   );
 }

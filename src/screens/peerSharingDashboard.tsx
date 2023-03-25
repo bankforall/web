@@ -1,11 +1,12 @@
 import React, { FC } from "react";
 import BaseLayout from "@/components/BaseLayout";
+
 const PeerSharingDashboard: FC = () => {
   let microFinanceAmount = 10000;
   let peerSharingAmount = 10000;
+
   return (
     <BaseLayout>
-      ASDASDASDASD
       <div className="px-4 space-y-8 pb-8">
         <div className="grid grid-cols-1 gap-4">
           <div className="flex justify-between py-4">

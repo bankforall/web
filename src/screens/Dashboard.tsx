@@ -1,12 +1,73 @@
-import React, { FC } from "react";
+import React, { useState } from "react";
 import BaseLayout from "@/components/BaseLayout";
-import {Link} from "react-router-dom";
-const Dashboard: FC = () => {
+import { Link } from "react-router-dom";
+
+const RangeSlider = ({ title, value, onInputChange, handleCancel }: any) => {
+  return (
+    <div className="absolute flex flex-col items-center bg-white rounded-md space-y-4 py-8 z-30 top-[50%] left-4 right-4 shadow-lg">
+      <h1 className="text-purple text-2xl font-bold">{title}</h1>
+      <p className="text-purple text-2xl">{value}</p>
+      <input
+        type="range"
+        min="0"
+        max="100"
+        value={value}
+        className="w-80"
+        onChange={onInputChange}
+      />
+
+      <div className="space-x-2">
+        <button
+          onClick={handleCancel}
+          className="w-24 py-2 bg-gray-200 text-gray-600  rounded-md capitalize font-bold"
+        >
+          Cancel
+        </button>
+        <button className="w-24 py-2 bg-lightpurple text-white rounded-md capitalize font-bold">
+          Save
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const Dashboard = () => {
   let microFinanceAmount = 10000;
   let peerSharingAmount = 10000;
+
+  const [moneyToInvestAndSave, setMoneyToInvestAndSave] = useState({
+    investYourMoney: 0,
+    saveYourMoney: 0,
+  });
+
+  const [InvestmentSliderModal, setInvestmentSliderModal] = useState(false);
+  const [SavingSliderModal, setSavingSliderModal] = useState(false);
+
+  const handleInvestYourMoney = (e: any) => {
+    setMoneyToInvestAndSave({
+      ...moneyToInvestAndSave,
+      investYourMoney: e.target.value,
+    });
+
+    console.log(moneyToInvestAndSave);
+  };
+
+  const handleSaveYourMoney = (e: any) => {
+    setMoneyToInvestAndSave({
+      ...moneyToInvestAndSave,
+      saveYourMoney: e.target.value,
+    });
+
+    console.log(moneyToInvestAndSave);
+  };
+
+  const toggleShowSliderModal = (showSliderModal: boolean, onToggle: any) => {
+    onToggle(!showSliderModal);
+  };
+
   return (
     <BaseLayout>
-      <div className="px-4 space-y-8 pb-8">
+      <div className="relative px-4 space-y-8 pb-8 z-0">
         <div className="grid grid-cols-1 gap-4">
           <div className="flex justify-between py-4">
             <div className="text-start my-2 font-semibold">You</div>
@@ -14,6 +75,38 @@ const Dashboard: FC = () => {
               <img src="https://png.pngitem.com/pimgs/s/168-1689599_male-user-filled-icon-user-icon-100-x.png"></img>
             </div>
           </div>
+
+          {InvestmentSliderModal && (
+            <>
+              <RangeSlider
+                title="Invest Your Money"
+                value={moneyToInvestAndSave.investYourMoney}
+                onInputChange={handleInvestYourMoney}
+                handleCancel={() => {
+                  toggleShowSliderModal(
+                    InvestmentSliderModal,
+                    setInvestmentSliderModal
+                  );
+                }}
+              />
+            </>
+          )}
+
+          {SavingSliderModal && (
+            <>
+              <RangeSlider
+                title="Save Your Money"
+                value={moneyToInvestAndSave.saveYourMoney}
+                onInputChange={handleSaveYourMoney}
+                handleCancel={() => {
+                  toggleShowSliderModal(
+                    SavingSliderModal,
+                    setSavingSliderModal
+                  );
+                }}
+              />
+            </>
+          )}
 
           <div className="grid grid-cols-1 gap-4">
             <div className="bg-[#7165E3] text-white font-bold rounded text-center px-20 py-10 ">
@@ -102,7 +195,12 @@ const Dashboard: FC = () => {
             Get your money working for you
           </p>
           <div className="grid grid-rows-2 gap-1 w-auto">
-            <div className="items-stretch border-solid border-2 border-#a1a1aa text-center py-3 px-5 rounded inline-flex w-full">
+            <button
+              onClick={() => {
+                toggleShowSliderModal(SavingSliderModal, setSavingSliderModal);
+              }}
+              className="items-stretch border-solid border-2 border-#a1a1aa text-center py-3 px-5 rounded inline-flex w-full cursor-pointer"
+            >
               <svg
                 width="42"
                 height="42"
@@ -144,8 +242,16 @@ const Dashboard: FC = () => {
               <div className="my-auto px-5 h-1 w-10 bg-gray-300">
                 <div className="h-full w-5 bg-red-600"></div>
               </div>
-            </div>
-            <button className="items-center border-solid border-2 border-#a1a1aa text-center py-3 px-5 rounded inline-flex w-full">
+            </button>
+            <button
+              onClick={() => {
+                toggleShowSliderModal(
+                  InvestmentSliderModal,
+                  setInvestmentSliderModal
+                );
+              }}
+              className="items-center border-solid border-2 border-#a1a1aa text-center py-3 px-5 rounded inline-flex w-full cursor-pointer"
+            >
               <svg
                 width="42"
                 height="42"
