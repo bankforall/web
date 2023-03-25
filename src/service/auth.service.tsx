@@ -1,5 +1,6 @@
 import {LoginSchema} from "@/libs/validations/login";
 import {RegisterSchema} from "@/libs/validations/register";
+import {RegisterRequest} from "@/model/register";
 
 export async function login(data: LoginSchema): Promise<boolean> {
     // return new Promise(resolve => setTimeout(() => {resolve(true)}, 1000));
@@ -47,7 +48,7 @@ export async function signUp(data: RegisterSchema): Promise<boolean> {
             email: data.email,
             password: data.password,
             phoneNumber: data.phoneNumber
-        })
+        } as RegisterRequest)
     })
         .then(response => {
             console.log('header', response.headers);

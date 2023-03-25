@@ -1,9 +1,34 @@
-import React, { FC } from "react";
+import React, {FC, useEffect, useState} from "react";
 import BaseLayout from "@/components/BaseLayout";
 import {Link} from "react-router-dom";
+import {getSummary} from "@/service/summary.service";
+import {MainDashboardSummary} from "@/model/summary";
 const Dashboard: FC = () => {
-  let microFinanceAmount = 10000;
-  let peerSharingAmount = 10000;
+  const [data, setData] = useState({
+    mainSummary: {
+      balance: '',
+      peerShareBalance: '',
+      microFinanceBalance: ''
+    } as MainDashboardSummary
+  });
+
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await getSummary();
+      console.log('ressss', response);
+      setData({mainSummary: response});
+    }
+
+    fetchData();
+    console.log('fetched')
+  }, []);
+
+  let microFinanceAmount: string = data.mainSummary.microFinanceBalance;
+  let peerSharingAmount: string = data.mainSummary.peerShareBalance;
+  let totalSaving: string = data.mainSummary.balance;
+  console.log('data', data);
+  console.log(microFinanceAmount, peerSharingAmount, totalSaving);
   return (
     <BaseLayout>
       <div className="px-4 space-y-8 pb-8">
@@ -18,7 +43,7 @@ const Dashboard: FC = () => {
           <div className="grid grid-cols-1 gap-4">
             <div className="bg-[#7165E3] text-white font-bold rounded text-center px-20 py-10 ">
               <div className="font-thin text-l">Total Saving</div>
-              <p className="font-bold text-3xl ">Baht 10,000</p>
+              <p className="font-bold text-3xl ">Baht {totalSaving ?? '-'}</p>
               <button
                 id="dropdownButton"
                 data-dropdown-toggle="dropdown"
@@ -227,7 +252,7 @@ const Dashboard: FC = () => {
         <div className="feature-container">
           <div className="feature-square border-solid border-2 border-#a1a1aa hover:bg-gray-300 text-center">
             <h1>peer sharing</h1>
-            <h3>{peerSharingAmount}</h3>
+            <h3>{peerSharingAmount ?? '-'}</h3>
             <button>
               <Link to="/peershare-dashboard" className="font-bold">
                 GO
@@ -236,7 +261,7 @@ const Dashboard: FC = () => {
           </div>
           <div className="feature-square border-solid border-2 border-#a1a1aa hover:bg-gray-300 text-center">
             <h1>micro finance</h1>
-            <h3>{microFinanceAmount}</h3>
+            <h3>{microFinanceAmount ?? '-'}</h3>
             <button>
               <Link to="" className="font-bold">
                 GO
