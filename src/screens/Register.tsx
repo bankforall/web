@@ -1,11 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { RegisterSchema, registerSchema } from "@/libs/validations/register";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import BaseLayout from "@/components/BaseLayout";
+import {signUp} from "@/service/auth.service";
 
 const Register = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -14,8 +16,12 @@ const Register = () => {
     resolver: zodResolver(registerSchema),
   });
 
-  const onSubmit: SubmitHandler<RegisterSchema> = (data) => {
+  const onSubmit: SubmitHandler<RegisterSchema> = async (data) => {
     console.log(data);
+    const res = await signUp(data);
+    if (res) {
+      navigate("/dashboard");
+    }
   };
 
   return (
@@ -82,6 +88,19 @@ const Register = () => {
                   <p className="mt-2 text-red-600 text-sm">
                     {errors.confirmPassword.message}
                   </p>
+                )}
+              </div>
+              <div>
+                <input
+                    className="bg-grey text-clay px-4 py-3 w-full rounded-lg placeholder:text-clay focus:outline-none focus:border-0 focus:ring-1 focus:ring-lightpurple"
+                    type="text"
+                    placeholder="Phone Number"
+                    {...register("phoneNumber")}
+                />
+                {errors.phoneNumber&& (
+                    <p className="mt-2 text-red-600 text-sm">
+                      {errors.phoneNumber.message}
+                    </p>
                 )}
               </div>
             </div>
