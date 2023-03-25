@@ -7,7 +7,9 @@ import PeerShareRoom from "@/screens/PeerShareRoom"
 import WonBidding from "@/screens/WonBidding"
 import Login from "@/screens/Login"
 import Register from "@/screens/Register"
+import SuccessAdd from "@/screens/SuccessAdded"
 import PeerSharingDashboard from "@/screens/peerSharingDashboard";
+import SuccessAdded from "@/screens/SuccessAdded"
 
 const router = createBrowserRouter([
   { path: "/", element: <Welcome /> },
@@ -16,6 +18,7 @@ const router = createBrowserRouter([
   { path: "/peershare-room", element: <PeerShareRoom /> },
   { path: "/dashboard", element: <Dashboard />, },
   { path: "/peershare-dashboard", element: <PeerSharingDashboard />},
+  { path: "/success-added", element: <SuccessAdded />},
   { path: "/won-bidding", element: <WonBidding />}
 ])
 
