@@ -1,6 +1,8 @@
 import React, { FC } from "react";
 import BaseLayout from "@/components/BaseLayout";
 const Dashboard: FC = () => {
+  let microFinanceAmount = 10000;
+  let peerSharingAmount = 10000;
   return (
     <BaseLayout>
       <div className="px-4 space-y-8 pb-8">
@@ -220,6 +222,18 @@ const Dashboard: FC = () => {
               Invite your friends and get a bonus
             </span>
           </button>
+        </div>
+        <div className="feature-container">
+          <div className="feature-square border-solid border-2 border-#a1a1aa hover:bg-gray-300 text-center">
+            <h1>peer sharing</h1>
+            <h3>{peerSharingAmount}</h3>
+            <button> GO </button>
+          </div>
+          <div className="feature-square border-solid border-2 border-#a1a1aa hover:bg-gray-300 text-center">
+            <h1>micro finance</h1>
+            <h3>{microFinanceAmount}</h3>
+            <button> GO </button>
+          </div>
         </div>
       </div>
     </BaseLayout>

@@ -14,3 +14,28 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+.feature-container {
+  display: flex;
+  justify-content: space-between;
+  width: 80vw;
+  height: 15vh;
+  min-height: 130px;
+  max-width: 100%;
+}
+
+.feature-container div {
+  padding: 2rem 0;
+}
+
+.feature-square {
+  width: 45%;
+}
+
+.feature-square button {
+  background-color: #FFBF1E;
+  border: none;
+  border-radius: 10px;
+  padding: 1% 10%;
+  margin-top: 0.1rem;
+}
