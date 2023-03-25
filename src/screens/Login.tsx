@@ -4,7 +4,6 @@ import { LoginSchema, loginSchema } from "@/libs/validations/login";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import BaseLayout from "@/components/BaseLayout";
-import Button from "@/components/Button";
 
 const Login = () => {
   const {
@@ -36,7 +35,11 @@ const Login = () => {
                   placeholder="Email"
                   {...register("email")}
                 />
-                {errors.email && <p className="mt-2 text-red-600 text-sm">{errors.email.message}</p>}
+                {errors.email && (
+                  <p className="mt-2 text-red-600 text-sm">
+                    {errors.email.message}
+                  </p>
+                )}
               </div>
               <div>
                 <input
@@ -45,13 +48,22 @@ const Login = () => {
                   placeholder="Password"
                   {...register("password")}
                 />
-                {errors.password && <p className="mt-2 text-red-600 text-sm">{errors.password.message}</p>}
+                {errors.password && (
+                  <p className="mt-2 text-red-600 text-sm">
+                    {errors.password.message}
+                  </p>
+                )}
               </div>
             </div>
             <div className="text-right mt-4 text-purple opacity-80 text-xs">
               <p>Forgot Password?</p>
             </div>
-            <Button type="submit">Sign in</Button>
+            <button
+              type="submit"
+              className="py-3 px-4 mt-12 w-full text-center bg-lightpurple text-white font-bold rounded-lg"
+            >
+              Sign in
+            </button>
             <p className="text-center text-purple opacity-80 mt-4">
               Don't have an account? -{" "}
               <Link to="/register" className="font-bold">

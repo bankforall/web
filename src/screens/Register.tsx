@@ -4,7 +4,6 @@ import { RegisterSchema, registerSchema } from "@/libs/validations/register";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import BaseLayout from "@/components/BaseLayout";
-import Button from "@/components/Button";
 
 const Register = () => {
   const {
@@ -104,7 +103,12 @@ const Register = () => {
                 </p>
               )}
             </div>
-            <Button type="submit">Sign up</Button>
+            <button
+              type="submit"
+              className="py-3 px-4 mt-12 w-full text-center bg-lightpurple text-white font-bold rounded-lg"
+            >
+              Sign Up
+            </button>
             <p className="text-center text-purple opacity-80 mt-4">
               Have an account? -{" "}
               <Link to="/login" className="font-bold">
