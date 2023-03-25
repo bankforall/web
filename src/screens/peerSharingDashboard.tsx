@@ -1,7 +1,7 @@
-import React, { FC } from "react";
+import React from "react";
 import BaseLayout from "@/components/BaseLayout";
 
-const PeerSharingDashboard: FC = () => {
+const PeerSharingDashboard = () => {
   let microFinanceAmount = 10000;
   let peerSharingAmount = 10000;
 

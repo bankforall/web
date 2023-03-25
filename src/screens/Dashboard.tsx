@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import BaseLayout from "@/components/BaseLayout";
 import { Link } from "react-router-dom";
+import { getSummary } from "@/service/summary.service";
+import { MainDashboardSummary } from "@/model/summary";
+import { deposit, withdraw } from "@/service/account-transaction.service";
 
 const RangeSlider = ({ title, value, onInputChange, handleCancel }: any) => {
   return (
@@ -32,9 +35,6 @@ const RangeSlider = ({ title, value, onInputChange, handleCancel }: any) => {
 };
 
 const Dashboard = () => {
-  let microFinanceAmount = 10000;
-  let peerSharingAmount = 10000;
-
   const [moneyToInvestAndSave, setMoneyToInvestAndSave] = useState({
     investYourMoney: 0,
     saveYourMoney: 0,
@@ -64,6 +64,67 @@ const Dashboard = () => {
   const toggleShowSliderModal = (showSliderModal: boolean, onToggle: any) => {
     onToggle(!showSliderModal);
   };
+
+  const [data, setData] = useState({
+    mainSummary: {
+      balance: "",
+      peerShareBalance: "",
+      microFinanceBalance: "",
+    } as MainDashboardSummary,
+  });
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await getSummary();
+      setData({ mainSummary: response });
+    }
+
+    fetchData();
+    console.log("fetched");
+  }, []);
+
+  let microFinanceAmount: string = data.mainSummary.microFinanceBalance;
+  let peerSharingAmount: string = data.mainSummary.peerShareBalance;
+  let totalSaving: string = data.mainSummary.balance;
+  console.log("data", data);
+  console.log(microFinanceAmount, peerSharingAmount, totalSaving);
+
+  function addMoneyButtonClick() {
+    depositMoney();
+  }
+
+  function withdrawMoneyButtonClick() {
+    withdrawMoney();
+  }
+
+  async function depositMoney(): Promise<void> {
+    const response = await deposit(1000);
+    if (response) {
+      const newBalance = parseInt(data.mainSummary.balance) + 1000;
+      const newMainSummary = {
+        ...data.mainSummary,
+        balance: newBalance.toString(),
+      };
+      setData({ mainSummary: newMainSummary });
+    } else {
+      alert("fail something something");
+    }
+  }
+
+  async function withdrawMoney(): Promise<void> {
+    const response = await withdraw(1000);
+    console.log("with", response);
+    if (response) {
+      const newBalance = parseInt(data.mainSummary.balance) - 1000;
+      const newMainSummary = {
+        ...data.mainSummary,
+        balance: newBalance.toString(),
+      };
+      setData({ mainSummary: newMainSummary });
+    } else {
+      alert("Insufficient balance");
+    }
+  }
 
   return (
     <BaseLayout>
@@ -111,7 +172,7 @@ const Dashboard = () => {
           <div className="grid grid-cols-1 gap-4">
             <div className="bg-[#7165E3] text-white font-bold rounded text-center px-20 py-10 ">
               <div className="font-thin text-l">Total Saving</div>
-              <p className="font-bold text-3xl ">Baht 10,000</p>
+              <p className="font-bold text-3xl ">Baht {totalSaving ?? "-"}</p>
               <button
                 id="dropdownButton"
                 data-dropdown-toggle="dropdown"
@@ -133,7 +194,10 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="grid grid-cols-2 gap-2">
-          <button className="bg-[#D5F6EE] hover:bg-gray-400 text-gray-800 font-semibold py-2 px-3 rounded inline-flex items-center">
+          <button
+            onClick={addMoneyButtonClick}
+            className="bg-[#D5F6EE] hover:bg-gray-400 text-gray-800 font-semibold py-2 px-3 rounded inline-flex items-center"
+          >
             <svg
               className=""
               width="30"
@@ -147,10 +211,13 @@ const Dashboard = () => {
                 fill="#36C4A2"
               />
             </svg>
-            <span className="mx-2">Add money</span>
+            <span className="mx-2">Add money (1000)</span>
           </button>
 
-          <button className="bg-[#FFF1D1] hover:bg-gray-400 text-gray-800 font-semibold py-2 px-3 rounded inline-flex items-center">
+          <button
+            onClick={withdrawMoneyButtonClick}
+            className="bg-[#FFF1D1] hover:bg-gray-400 text-gray-800 font-semibold py-2 px-3 rounded inline-flex items-center"
+          >
             <svg
               width="30"
               height="30"
@@ -187,7 +254,7 @@ const Dashboard = () => {
                 fill="#FD9101"
               />
             </svg>
-            <span className="mx-2">Withdraw</span>
+            <span className="mx-2">Withdraw (1000)</span>
           </button>
         </div>
         <div className="space-y-3">
@@ -333,7 +400,7 @@ const Dashboard = () => {
         <div className="feature-container">
           <div className="feature-square border-solid border-2 border-#a1a1aa hover:bg-gray-300 text-center">
             <h1>peer sharing</h1>
-            <h3>{peerSharingAmount}</h3>
+            <h3>{peerSharingAmount ?? "-"}</h3>
             <button>
               <Link to="/peershare-dashboard" className="font-bold">
                 GO
@@ -342,7 +409,7 @@ const Dashboard = () => {
           </div>
           <div className="feature-square border-solid border-2 border-#a1a1aa hover:bg-gray-300 text-center">
             <h1>micro finance</h1>
-            <h3>{microFinanceAmount}</h3>
+            <h3>{microFinanceAmount ?? "-"}</h3>
             <button>
               <Link to="" className="font-bold">
                 GO
