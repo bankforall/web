@@ -1,11 +1,11 @@
 import React, { FC } from "react";
 import BaseLayout from "@/components/BaseLayout";
-import {Link} from "react-router-dom";
-const Dashboard: FC = () => {
+const PeerSharingDashboard: FC = () => {
   let microFinanceAmount = 10000;
   let peerSharingAmount = 10000;
   return (
     <BaseLayout>
+      ASDASDASDASD
       <div className="px-4 space-y-8 pb-8">
         <div className="grid grid-cols-1 gap-4">
           <div className="flex justify-between py-4">
@@ -228,24 +228,16 @@ const Dashboard: FC = () => {
           <div className="feature-square border-solid border-2 border-#a1a1aa hover:bg-gray-300 text-center">
             <h1>peer sharing</h1>
             <h3>{peerSharingAmount}</h3>
-            <button>
-              <Link to="/peershare-dashboard" className="font-bold">
-                GO
-              </Link>
-            </button>
+            <button> GO </button>
           </div>
           <div className="feature-square border-solid border-2 border-#a1a1aa hover:bg-gray-300 text-center">
             <h1>micro finance</h1>
             <h3>{microFinanceAmount}</h3>
-            <button>
-              <Link to="" className="font-bold">
-                GO
-              </Link>
-            </button>
+            <button> GO </button>
           </div>
         </div>
       </div>
     </BaseLayout>
   );
 };
-export default Dashboard;
+export default PeerSharingDashboard;

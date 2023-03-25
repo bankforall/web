@@ -6,6 +6,7 @@ import Dashboard from "@/screens/Dashboard"
 import PeerShareRoom from "@/screens/PeerShareRoom"
 import Login from "@/screens/Login"
 import Register from "@/screens/Register"
+import PeerSharingDashboard from "@/screens/peerSharingDashboard";
 
 const router = createBrowserRouter([
   { path: "/", element: <Welcome /> },
@@ -13,6 +14,7 @@ const router = createBrowserRouter([
   { path: "/register", element: <Register /> },
   { path: "/peershare-room", element: <PeerShareRoom /> },
   { path: "/dashboard", element: <Dashboard />, },
+  { path: "/peershare-dashboard", element: <PeerSharingDashboard />}
 ])
 
 const App = () => {
