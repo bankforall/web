@@ -1,32 +1,30 @@
-import {LoginSchema} from "@/libs/validations/login";
-import {RegisterSchema} from "@/libs/validations/register";
-import {RegisterRequest} from "@/model/register";
-
-export async function login(data: LoginSchema): Promise<boolean> {
+export async function deposit(amount: Number): Promise<boolean> {
     // return new Promise(resolve => setTimeout(() => {resolve(true)}, 1000));
-    return await fetch('http://10.2.150.92:5000/auth/signin', {
+    return await fetch('http://10.2.150.92:5000/transaction/deposit', {
         method: 'POST',
         headers: {
             'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${sessionStorage.getItem('userToken')}`
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify({amount})
     })
         .then(response => {
             console.log('header', response.headers);
             if(response.status === 200) {
                 return response.json()
             } else {
-                return false;
+                return {};
             }
 
         }).then(response => {
             console.log('res', response)
             if (response) {
-                sessionStorage.setItem('userToken', response.access_token);
+                // sessionStorage.setItem('userToken', response.access_token);
+                console.log('resRes', response);
                 return true;
             }
-            alert('user/password incorrect');
+            console.error('error getting user summary')
             return false;
         }).catch(error => {
             console.error('Error:', error);
@@ -34,21 +32,16 @@ export async function login(data: LoginSchema): Promise<boolean> {
         });
 }
 
-export async function signUp(data: RegisterSchema): Promise<boolean> {
+export async function withdraw(amount: Number): Promise<boolean> {
     // return new Promise(resolve => setTimeout(() => {resolve(true)}, 1000));
-    console.log('data', JSON.stringify(data));
-    return await fetch('http://10.2.150.92:5000/auth/signup', {
+    return await fetch('http://10.2.150.92:5000/transaction/withdraw', {
         method: 'POST',
         headers: {
             'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${sessionStorage.getItem('userToken')}`
         },
-        body: JSON.stringify({
-            fullname: data.fullname,
-            email: data.email,
-            password: data.password,
-            phoneNumber: data.phoneNumber
-        } as RegisterRequest)
+        body: JSON.stringify({amount})
     })
         .then(response => {
             console.log('header', response.headers);
@@ -61,10 +54,11 @@ export async function signUp(data: RegisterSchema): Promise<boolean> {
         }).then(response => {
             console.log('res', response)
             if (response) {
-                sessionStorage.setItem('userToken', response.access_token);
+                // sessionStorage.setItem('userToken', response.access_token);
+                console.log('resRes', response);
                 return true;
             }
-            alert('unknown error');
+            console.error('error getting user summary')
             return false;
         }).catch(error => {
             console.error('Error:', error);
