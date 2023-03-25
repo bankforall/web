@@ -24,25 +24,35 @@ const Login = () => {
   };
 
   async function login(data: LoginSchema): Promise<boolean> {
-    return new Promise(resolve => setTimeout(() => {resolve(true)}, 1000));
+    // return new Promise(resolve => setTimeout(() => {resolve(true)}, 1000));
+    return await fetch('http://10.2.150.92:5000/auth/signin', {
+      method: 'POST',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+        .then(response => {
+          console.log('header', response.headers);
+          if(response.status === 200) {
+            return response.json()
+          } else {
+            return false;
+          }
 
-    //TODO wait for backend
-    // return await fetch('https://localhost:8080/signIn', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(data)
-    // })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //       console.log('Success:', data);
-    //       return true;
-    //     })
-    //     .catch(error => {
-    //       console.error('Error:', error);
-    //       return false;
-    //     });
+        }).then(response => {
+          console.log('res', response)
+          if (response) {
+            sessionStorage.setItem('userToken', response.access_token);
+            return true;
+          }
+          alert('user/password incorrect');
+          return false;
+        }).catch(error => {
+          console.error('Error:', error);
+          return false;
+        });
   }
 
   return (
