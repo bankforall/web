@@ -3,6 +3,7 @@ import BaseLayout from "@/components/BaseLayout";
 import {Link} from "react-router-dom";
 import {getSummary} from "@/service/summary.service";
 import {MainDashboardSummary} from "@/model/summary";
+import {deposit} from "@/service/account-transaction.service";
 const Dashboard: FC = () => {
   const [data, setData] = useState({
     mainSummary: {
@@ -29,6 +30,23 @@ const Dashboard: FC = () => {
   let totalSaving: string = data.mainSummary.balance;
   console.log('data', data);
   console.log(microFinanceAmount, peerSharingAmount, totalSaving);
+
+  function addMoneyButtonClick(){
+   depositMoney()
+  }
+
+  async function depositMoney(): Promise<void> {
+    console.count('deposit')
+    const response = await deposit(1000);
+    if (response) {
+      data.mainSummary.balance += 1000;
+      setData(data)
+      alert('amount added: 1000');
+    } else {
+      alert('fail something something');
+    }
+  }
+
   return (
     <BaseLayout>
       <div className="px-4 space-y-8 pb-8">
@@ -65,7 +83,7 @@ const Dashboard: FC = () => {
           </div>
         </div>
         <div className="grid grid-cols-2 gap-2">
-          <button className="bg-[#D5F6EE] hover:bg-gray-400 text-gray-800 font-semibold py-2 px-3 rounded inline-flex items-center">
+          <button onClick={addMoneyButtonClick} className="bg-[#D5F6EE] hover:bg-gray-400 text-gray-800 font-semibold py-2 px-3 rounded inline-flex items-center">
             <svg
               className=""
               width="30"
@@ -79,7 +97,7 @@ const Dashboard: FC = () => {
                 fill="#36C4A2"
               />
             </svg>
-            <span className="mx-2">Add money</span>
+            <span className="mx-2">Add money (1000)</span>
           </button>
 
           <button className="bg-[#FFF1D1] hover:bg-gray-400 text-gray-800 font-semibold py-2 px-3 rounded inline-flex items-center">
