@@ -1,6 +1,7 @@
-# Bank For All - Peer Share and Microfinance Platform for The Poor People
+# Bank For All - Peer Share and Microfinance Platform for All
+This is an open-source project aimed at creating a peer sharing and microfinance platform for people who unemployed or low-income individuals or groups who otherwise would have no other access to financial services.
 
-This is an open-source project aimed at creating a peer sharing and microfinance platform for poor people. The platform will enable low-income individuals to access loans, as well as share resources and knowledge with each other, thereby creating a sustainable community.
+The platform will enable them to access loans, as well as share resources and knowledge with each other, thereby creating a sustainable community.
 
 ## Features (Peer Share UI)
 
@@ -23,7 +24,7 @@ Designs for the Peer Share UI can be found [here](https://www.figma.com/file/Yu0
 - [ ] Peer Share Room (Receipt) Screen
 - [ ] Won Bids Screen
 
-> If any of you have an idea to share with we, feel free to open a pull request.
+> If any of you have an idea to share with us, please feel free to open a pull request.
 
 ## Technologies Used
 
