@@ -8,7 +8,7 @@ export default function Congratulation({
 }) {
   return (
     <BaseLayout>
-      <div className="py-40 items-center text-center">
+      <div className="flex justify-center flex-col h-[50vh] px-8 items-center text-center">
         <div className="mx-28">
           <svg
             width="150"
@@ -29,12 +29,6 @@ export default function Congratulation({
         <div className="text-3xl my-3">Success</div>
         <div className="text-xs">{description}</div>
       </div>
-      <button
-        type="submit"
-        className=" py-3 my-10 mx-28 w-40 text-center bg-lightpurple text-white font-bold rounded-lg"
-      >
-        CLOSE
-      </button>
     </BaseLayout>
   );
 }
