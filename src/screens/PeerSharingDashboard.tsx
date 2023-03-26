@@ -1,11 +1,15 @@
 import React, {useEffect, useState} from "react";
-import {PeerShareRoom} from "@/model/peershare-room";
+import {Member, PeerShareRoom} from "@/model/peershare-room";
 import BaseLayout from "@/components/BaseLayout";
 import {getAllRoom, joinRoom} from "@/service/peer-sharing.service";
 import {useNavigate} from "react-router-dom";
 import CommonModal from "@/modals/CommonModal";
 
 const PeerSharingDashboard = () => {
+  function isAlreadyJoined(members: Member[]): boolean {
+    return members.some(member => member.user === sessionStorage.getItem('userId'));
+  }
+
   const navigate = useNavigate();
   async function onJoinPrivateRoomClick(roomPassword: string) {
     console.log(roomPassword);
@@ -22,6 +26,10 @@ const PeerSharingDashboard = () => {
     setData({...data, showJoinPrivateRoomModal: false});
   }
   function onJoinButtonClick(room: PeerShareRoom) {
+    if (isAlreadyJoined(room.members)) {
+      navigate(`/peershare-room/${room.id}`);
+      return
+    }
 
     if (room.roomType === 'public') {
       if (room.joinable) {
@@ -111,15 +119,15 @@ const PeerSharingDashboard = () => {
                   </p>
                 </div>
               </div>
-              {room.roomType === "public" ? (
+              {(room.roomType === "public" || isAlreadyJoined(room.members)) ? (
                 <button
                     onClick={() => onJoinButtonClick(room)}
                   className="rounded-md px-4 py-2 text-white"
                   style={{
-                    backgroundColor: room.joinable ? "mediumpurple" : "gray",
+                    backgroundColor: (room.joinable || isAlreadyJoined(room.members)) ? "mediumpurple" : "gray",
                   }}
                 >
-                  JOIN
+                  {isAlreadyJoined(room.members) ? 'JOINED' : 'JOIN'}
                 </button>
               ) : (
                 <button

@@ -1,6 +1,7 @@
 import {LoginSchema} from "@/libs/validations/login";
 import {RegisterSchema} from "@/libs/validations/register";
 import {RegisterRequest} from "@/model/register";
+import jwt_decode from 'jwt-decode';
 
 export async function login(data: LoginSchema): Promise<boolean> {
     // return new Promise(resolve => setTimeout(() => {resolve(true)}, 1000));
@@ -23,6 +24,8 @@ export async function login(data: LoginSchema): Promise<boolean> {
         }).then(response => {
             console.log('res', response)
             if (response) {
+                const decodedToken: {id: string, exp: number, iat: number} = jwt_decode(response.access_token);
+                sessionStorage.setItem('userId', decodedToken.id);
                 sessionStorage.setItem('userToken', response.access_token);
                 return true;
             }
@@ -61,6 +64,8 @@ export async function signUp(data: RegisterSchema): Promise<boolean> {
         }).then(response => {
             console.log('res', response)
             if (response) {
+                const decodedToken : {id: string, exp: number, iat: number} = jwt_decode(response.access_token);
+                sessionStorage.setItem('userId', decodedToken.id);
                 sessionStorage.setItem('userToken', response.access_token);
                 return true;
             }
