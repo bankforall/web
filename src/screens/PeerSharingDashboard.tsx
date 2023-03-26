@@ -1,49 +1,59 @@
-import React from "react";
-import { PeerShareRoom } from "@/model/peershare-room";
+import React, {useEffect, useState} from "react";
+import {PeerShareRoom} from "@/model/peershare-room";
 import BaseLayout from "@/components/BaseLayout";
+import {getAllRoom, joinRoom} from "@/service/peer-sharing.service";
+import {useNavigate} from "react-router-dom";
+import CommonModal from "@/modals/CommonModal";
 
 const PeerSharingDashboard = () => {
-  let peerShareRoomList: PeerShareRoom[] = [];
-  let microFinanceAmount = 10000;
-  let peerSharingAmount = 10000;
-  let activeTab = 0;
+  const navigate = useNavigate();
+  async function onJoinPrivateRoomClick(roomPassword: string) {
+    console.log(roomPassword);
+    const {inviteCode, _id} = data.currentPrivatePeerShareRoom;
+
+    const response = await joinRoom(inviteCode ?? '', roomPassword);
+    console.log('res123', response);
+    console.log(data.currentPrivatePeerShareRoom);
+    if (response) {
+      navigate(`/peershare-room/${_id}`);
+    } else {
+      alert('incorrect invite code');
+    }
+    setData({...data, showJoinPrivateRoomModal: false});
+  }
+  function onJoinButtonClick(room: PeerShareRoom) {
+
+    if (room.roomType === 'public') {
+      if (room.joinable) {
+        navigate(`/peershare-room/${room.id}`);
+      } else {
+        alert('requirement not met.');
+      }
+    } else {
+      setData({...data, showJoinPrivateRoomModal: true, currentPrivatePeerShareRoom: room});
+    }
+  }
+
+  const [data, setData] = useState({
+    peerShareRoomList: [] as PeerShareRoom[],
+    showJoinPrivateRoomModal: false,
+    currentPrivatePeerShareRoom: {} as PeerShareRoom
+  });
+
   let peerShareAmount = 0;
   let currentDeptEquity = 2;
   let creditScore = "SSS+";
 
-  peerShareRoomList.push({
-    roomName: "firstRoom",
-    peerShareType: "fixed",
-    payment: 1234,
-    maxMember: 10,
-    minimumCredit: "A",
-    joinable: true,
-    roomType: "public",
-  } as PeerShareRoom);
-  peerShareRoomList.push({
-    roomName: "secondRoom",
-    peerShareType: "fixed",
-    payment: 1234,
-    maxMember: 10,
-    minimumCredit: "A",
-    roomType: "private",
-  } as PeerShareRoom);
-  peerShareRoomList.push({
-    roomName: "thirdRoom",
-    peerShareType: "fixed",
-    payment: 1234,
-    maxMember: 10,
-    minimumCredit: "A",
-    roomType: "public",
-  } as PeerShareRoom);
-  peerShareRoomList.push({
-    roomName: "forthRoom",
-    peerShareType: "fixed",
-    payment: 1234,
-    maxMember: 10,
-    minimumCredit: "A",
-    roomType: "public",
-  } as PeerShareRoom);
+  useEffect(() => {
+    async function fetchData() {
+      const response = await getAllRoom();
+      console.log('peerShareDashboard', response);
+      setData({ ...data, peerShareRoomList: response });
+    }
+
+    fetchData();
+    console.log("fetched");
+  }, []);
 
   return (
     <BaseLayout>
@@ -71,7 +81,7 @@ const PeerSharingDashboard = () => {
           Create Room
         </button>
         <ul className="space-y-4 grid">
-          {peerShareRoomList.map((room) => (
+          {data.peerShareRoomList.map((room) => (
             <li
               key={room.roomName}
               className="flex justify-between items-center rounded-md bg-white p-4 shadow-md"
@@ -81,25 +91,29 @@ const PeerSharingDashboard = () => {
                   Room Name: {room.roomName}
                 </h3>
                 <h6 className="text-sm font-medium">
-                  Members: {0 + ""} / {room.maxMember + ""}
+                  Members: {room.members.length} / {room.maxMember + ""}
                 </h6>
                 <h6 className="text-sm font-medium">
-                  Credit: {room.minimumCredit}
+                  Credit: {room.creditRequirement}
                 </h6>
                 <p className="text-sm font-medium">
-                  Type: {room.peerShareType}
+                  Type: {room.typeRoom}
+                </p>
+                <p className="text-sm font-medium">
+                  Payment term: {room.paymentTerm}
                 </p>
                 <div className="relative h-24">
                   <p className="absolute z-20 bottom-0 flex items-center h-7 w-48 text-sm rounded-full bg-lightpurple pl-4 text-white font-bold">
-                    Pool: Bath {room.payment + ""}
+                    Pool: Bath {Number(room.paymentTerm) * room.members.length}
                   </p>
                   <p className="absolute z-10 bottom-0 h-[27px] w-72 flex justify-end items-center text-sm rounded-full border-dashed border-[1px] bg-gray-200 text-gray-400 font-bol pr-2">
-                    Bath: {room.payment + ""}
+                    Bath: {Number(room.paymentTerm) * Number(room.maxMember)}
                   </p>
                 </div>
               </div>
               {room.roomType === "public" ? (
                 <button
+                    onClick={() => onJoinButtonClick(room)}
                   className="rounded-md px-4 py-2 text-white"
                   style={{
                     backgroundColor: room.joinable ? "mediumpurple" : "gray",
@@ -109,6 +123,7 @@ const PeerSharingDashboard = () => {
                 </button>
               ) : (
                 <button
+                    onClick={() =>onJoinButtonClick(room)}
                   className="rounded-md  px-4 py-2 text-white"
                   style={{
                     backgroundColor: room.joinable ? "mediumpurple" : "gray",
@@ -121,6 +136,13 @@ const PeerSharingDashboard = () => {
           ))}
         </ul>
       </div>
+      { data.showJoinPrivateRoomModal &&
+          <CommonModal title={`Join Private Peer Share Room: ${data.currentPrivatePeerShareRoom.roomName}`}
+                       textInputPromptTitle={'to join please type in the invitation code'}
+                       yesButtonName={'OK'}
+                       yesButtonClickedCallback={onJoinPrivateRoomClick}
+          ></CommonModal>
+      }
     </BaseLayout>
   );
 };

@@ -12,7 +12,7 @@ const router = createBrowserRouter([
   { path: "/", element: <Welcome /> },
   { path: "/login", element: <Login /> },
   { path: "/register", element: <Register /> },
-  { path: "/peershare-room", element: <PeerShareRoom /> },
+  { path: "/peershare-room/:id", element: <PeerShareRoom /> },
   { path: "/dashboard", element: <Dashboard /> },
   { path: "/peershare-dashboard", element: <PeerSharingDashboard /> },
 ]);
