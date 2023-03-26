@@ -4,6 +4,7 @@ import CountdownTimer from "@/components/CountdownTimer";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import Congratulation from "@/components/Congratulation";
+import {useParams} from "react-router-dom";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const PeerShareRoomData = {
@@ -791,6 +792,8 @@ function PaymentTab({
 }
 
 export default function PeerShareRoom() {
+  const { id } = useParams()
+  console.log(id);
   const [activeTab, setActiveTab] = useState(0);
   const [comfirmPayment, setComfirmPayment] = useState(false);
   const handleTabClick = (tab: number) => {

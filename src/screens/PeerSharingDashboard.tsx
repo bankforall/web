@@ -12,14 +12,12 @@ const PeerSharingDashboard = () => {
 
   const navigate = useNavigate();
   async function onJoinPrivateRoomClick(roomPassword: string) {
-    console.log(roomPassword);
-    const {inviteCode, _id} = data.currentPrivatePeerShareRoom;
-
-    const response = await joinRoom(inviteCode ?? '', roomPassword);
-    console.log('res123', response);
-    console.log(data.currentPrivatePeerShareRoom);
+    const response = await joinRoom(
+        data.currentPrivatePeerShareRoom.inviteCode ?? '',
+        roomPassword
+    );
     if (response) {
-      navigate(`/peershare-room/${_id}`);
+      navigateToPeerShareRoom(data.currentPrivatePeerShareRoom);
     } else {
       alert('incorrect invite code');
     }
@@ -27,19 +25,23 @@ const PeerSharingDashboard = () => {
   }
   function onJoinButtonClick(room: PeerShareRoom) {
     if (isAlreadyJoined(room.members)) {
-      navigate(`/peershare-room/${room.id}`);
+      navigateToPeerShareRoom(room);
       return
     }
 
     if (room.roomType === 'public') {
       if (room.joinable) {
-        navigate(`/peershare-room/${room.id}`);
+        navigateToPeerShareRoom(room);
       } else {
         alert('requirement not met.');
       }
     } else {
       setData({...data, showJoinPrivateRoomModal: true, currentPrivatePeerShareRoom: room});
     }
+  }
+
+  function navigateToPeerShareRoom(peerShareRoom: PeerShareRoom) {
+    navigate(`/peershare-room/${peerShareRoom._id}`, {state: peerShareRoom});
   }
 
   const [data, setData] = useState({
@@ -121,6 +123,7 @@ const PeerSharingDashboard = () => {
               </div>
               {(room.roomType === "public" || isAlreadyJoined(room.members)) ? (
                 <button
+                    disabled={room.maxMember === room.members.length && !isAlreadyJoined(room.members)}
                     onClick={() => onJoinButtonClick(room)}
                   className="rounded-md px-4 py-2 text-white"
                   style={{
@@ -131,6 +134,7 @@ const PeerSharingDashboard = () => {
                 </button>
               ) : (
                 <button
+                    disabled={room.maxMember === room.members.length && !isAlreadyJoined(room.members)}
                     onClick={() =>onJoinButtonClick(room)}
                   className="rounded-md  px-4 py-2 text-white"
                   style={{
