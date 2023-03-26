@@ -1,5 +1,5 @@
 import React from "react";
-import { PeerShareRoom } from "@/model/peerShareRoom";
+import { PeerShareRoom } from "@/model/peershare-room";
 import BaseLayout from "@/components/BaseLayout";
 
 const PeerSharingDashboard = () => {
