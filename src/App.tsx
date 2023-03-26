@@ -4,9 +4,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Welcome from "@/screens/Welcome";
 import Dashboard from "@/screens/Dashboard";
 import PeerShareRoom from "@/screens/PeerShareRoom";
+import PeerSharingDashboard from "@/screens/PeerSharingDashboard";
 import Login from "@/screens/Login";
 import Register from "@/screens/Register";
-import PeerSharingDashboard from "@/screens/PeerSharingDashboard";
 
 const router = createBrowserRouter([
   { path: "/", element: <Welcome /> },
